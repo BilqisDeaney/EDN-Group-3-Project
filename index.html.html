@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Learning Design Across Contexts — Group 3, EDN4601 Introduction to Learning Design, UCT 2026. A multimodal artefact examining learning design as role, practice, artefact and field across six practitioners in Group A and Group B focus groups." name="description"/>
+<title>Learning Design Across Contexts — Group 3 · EDN4601</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<style>
+/* ══════════════════════════════════════════
+   DESIGN TOKENS
+══════════════════════════════════════════ */
+:root {
+  --ink:         #18292F;
+  --teal:        #1B6E61;
+  --teal-mid:    #27A18E;
+  --teal-pale:   #B4DED8;
+  --sand:        #F4EFE4;
+  --cream:       #FAFAF6;
+  --white:       #FFFFFF;
+  --berry:       #7A2840;
+  --berry-pale:  #EDD6DF;
+  --amber:       #B8742A;
+  --amber-pale:  #F3E0C5;
+  --slate:       #4C6575;
+  --muted:       #8DA0AB;
+  --border:      rgba(24,41,47,.1);
+  --r:           14px;
+  --r-lg:        22px;
+  --sh-sm:       0 2px 8px rgba(24,41,47,.08);
+  --sh-md:       0 8px 28px rgba(24,41,47,.13);
+  --sh-lg:       0 20px 60px rgba(24,41,47,.18);
+  --ease:        cubic-bezier(.4,0,.2,1);
+  --t:           .28s;
+  --fh:          'Lora', Georgia, serif;
+  --fb:          'Plus Jakarta Sans', system-ui, sans-serif;
+  --fm:          'JetBrains Mono', monospace;
+}
+
+/* ══════════════════════════════════════════
+   RESET & BASE
+══════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px;-webkit-text-size-adjust:100%}
+body{font-family:var(--fb);background:var(--cream);color:var(--ink);line-height:1.7;overflow-x:hidden}
+img{max-width:100%;height:auto}
+a{color:inherit}
+
+/* ══════════════════════════════════════════
+   ACCESSIBILITY
+══════════════════════════════════════════ */
+.skip-link{
+  position:absolute;top:-100%;left:1rem;
+  background:var(--teal);color:var(--white);
+  padding:.5rem 1.2rem;border-radius:8px;
+  font-weight:600;text-decoration:none;z-index:9999;
+  transition:top .2s;
+}
+.skip-link:focus{top:1rem}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}}
+@media(prefers-contrast:high){.card,.method-card,.sim-card{border-width:2px!important}}
+
+/* ══════════════════════════════════════════
+   PROGRESS BAR
+══════════════════════════════════════════ */
+#prog{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--teal),var(--teal-mid),var(--amber));z-index:1000;transition:width .12s linear}
+
+/* ══════════════════════════════════════════
+   NAV
+══════════════════════════════════════════ */
+nav{
+  position:fixed;top:3px;left:0;right:0;z-index:900;
+  background:rgba(250,250,246,.93);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+  padding:.7rem 1.5rem;
+  display:flex;align-items:center;justify-content:space-between;gap:.75rem;
+}
+.nav-brand{font-family:var(--fh);font-size:.9rem;font-style:italic;color:var(--teal);text-decoration:none;white-space:nowrap}
+.nav-links{display:flex;gap:.15rem;list-style:none;flex-wrap:wrap}
+.nav-links a{
+  font-size:.72rem;font-weight:600;color:var(--slate);letter-spacing:.02em;
+  text-decoration:none;padding:.3rem .6rem;border-radius:6px;
+  transition:background var(--t) var(--ease),color var(--t) var(--ease);
+  white-space:nowrap;
+}
+.nav-links a:hover,.nav-links a:focus{background:var(--teal-pale);color:var(--teal)}
+.nav-links a.active{background:var(--teal);color:var(--white)}
+.missing-badge{
+  display:inline-flex;align-items:center;gap:.35rem;
+  background:var(--amber-pale);border:1px solid var(--amber);
+  color:var(--amber);border-radius:6px;padding:.2rem .6rem;
+  font-size:.72rem;font-weight:600;font-family:var(--fm);
+}
+
+/* ══════════════════════════════════════════
+   HERO
+══════════════════════════════════════════ */
+#hero{
+  min-height:100vh;display:flex;align-items:center;
+  background:var(--ink);padding:7rem 2rem 5rem;
+  position:relative;overflow:hidden;
+}
+.hero-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.hero-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1;display:grid;grid-template-columns:1.1fr 1fr;gap:4rem;align-items:center}
+.hero-kicker{font-family:var(--fm);font-size:.7rem;letter-spacing:.18em;color:var(--teal-mid);text-transform:uppercase;margin-bottom:1.25rem;display:flex;align-items:center;gap:.6rem}
+.hero-kicker::before{content:'';width:20px;height:2px;background:var(--teal-mid)}
+.hero-h1{font-family:var(--fh);font-size:clamp(2rem,5vw,3.4rem);color:var(--white);line-height:1.12;margin-bottom:1.4rem}
+.hero-h1 em{color:var(--amber);font-style:italic}
+.hero-sub{font-size:1rem;color:var(--teal-pale);line-height:1.7;margin-bottom:2rem;max-width:480px}
+.hero-ctas{display:flex;gap:.75rem;flex-wrap:wrap}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--teal);color:var(--white);
+  padding:.8rem 1.6rem;border-radius:50px;
+  text-decoration:none;font-weight:600;font-size:.9rem;
+  transition:background var(--t),transform var(--t),box-shadow var(--t);
+  box-shadow:0 4px 18px rgba(27,110,97,.45);
+}
+.btn-primary:hover,.btn-primary:focus{background:var(--teal-mid);transform:translateY(-2px);box-shadow:0 8px 28px rgba(27,110,97,.5)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:.5rem;
+  border:1.5px solid rgba(255,255,255,.25);color:rgba(255,255,255,.8);
+  padding:.78rem 1.5rem;border-radius:50px;
+  text-decoration:none;font-weight:500;font-size:.9rem;
+  transition:border-color var(--t),background var(--t),color var(--t);
+}
+.btn-ghost:hover,.btn-ghost:focus{border-color:var(--teal-mid);background:rgba(255,255,255,.06);color:var(--white)}
+
+/* Participant grid */
+.participant-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.p-chip{
+  background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;padding:.7rem .9rem;
+  display:flex;align-items:flex-start;gap:.65rem;
+  transition:background var(--t),border-color var(--t);
+  position:relative;
+}
+.p-chip:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.22)}
+.p-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:.35rem}
+.p-chip-role{font-size:.8rem;font-weight:600;color:var(--white);line-height:1.3}
+.p-chip-org{font-size:.72rem;color:var(--muted);line-height:1.4;margin-top:.1rem}
+.group-label{
+  font-family:var(--fm);font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--teal-mid);margin-bottom:.4rem;display:block;
+}
+
+/* ══════════════════════════════════════════
+   SECTION SCAFFOLD
+══════════════════════════════════════════ */
+.section{padding:5.5rem 2rem}
+.section-alt{background:var(--sand)}
+.section-dark{background:var(--ink);padding:5rem 2rem}
+.inner{max-width:1100px;margin:0 auto}
+.section-label{
+  font-family:var(--fm);font-size:.68rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);
+  margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem;
+}
+.section-label::before{content:'';width:20px;height:1.5px;background:var(--teal-mid)}
+.dark-label{color:var(--teal-mid)}
+.dark-label::before{background:var(--teal-mid)}
+h2.section-h{font-family:var(--fh);font-size:clamp(1.6rem,3.5vw,2.4rem);color:var(--ink);line-height:1.2;margin-bottom:.9rem}
+h2.section-h.light{color:var(--white)}
+.section-lead{font-size:1rem;color:var(--slate);max-width:680px;line-height:1.8;margin-bottom:2.5rem}
+.section-lead.light{color:var(--teal-pale)}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+.reveal.v{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.40s}.d6{transition-delay:.48s}
+
+/* ══════════════════════════════════════════
+   01 — MISSING FILE NOTICE
+══════════════════════════════════════════ */
+.notice-banner{
+  background:var(--amber-pale);border:1.5px solid var(--amber);
+  border-radius:var(--r-lg);padding:1.5rem 1.75rem;margin-bottom:2rem;
+  display:flex;gap:1rem;align-items:flex-start;
+}
+.notice-icon{font-size:1.4rem;flex-shrink:0;margin-top:.1rem}
+.notice-content h3{font-size:.95rem;font-weight:700;color:var(--amber);margin-bottom:.35rem}
+.notice-content p{font-size:.875rem;color:var(--ink);line-height:1.65}
+.notice-content strong{font-weight:700}
+
+/* ══════════════════════════════════════════
+   02 — METHODOLOGY
+══════════════════════════════════════════ */
+.rq-box{
+  background:var(--ink);border-radius:var(--r-lg);
+  padding:2.5rem 2.75rem;margin-bottom:3rem;
+  position:relative;overflow:hidden;
+}
+.rq-box::before{content:'"';position:absolute;top:-2rem;left:.5rem;font-family:var(--fh);font-size:10rem;color:var(--teal);opacity:.12;line-height:1;pointer-events:none}
+.rq-box p{font-family:var(--fh);font-size:clamp(1.05rem,2.3vw,1.4rem);color:var(--white);font-style:italic;line-height:1.55;position:relative;z-index:1}
+.rq-box .rq-tag{font-family:var(--fm);font-size:.68rem;letter-spacing:.1em;color:var(--amber);text-transform:uppercase;display:block;margin-top:.85rem;position:relative;z-index:1}
+
+.method-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem}
+.method-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--r-lg);padding:1.6rem;
+  position:relative;overflow:hidden;
+  transition:box-shadow var(--t),transform var(--t);
+}
+.method-card:hover{box-shadow:var(--sh-md);transform:translateY(-3px)}
+.method-card::after{content:attr(data-n);position:absolute;bottom:-.5rem;right:.5rem;font-family:var(--fh);font-size:5rem;font-weight:700;color:var(--teal);opacity:.06;line-height:1;pointer-events:none}
+.method-icon{width:40px;height:40px;border-radius:10px;background:var(--teal);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;color:var(--white)}
+.method-card h3{font-size:.95rem;font-weight:700;margin-bottom:.4rem}
+.method-card p{font-size:.85rem;color:var(--slate);line-height:1.6}
+
+/* ══════════════════════════════════════════
+   03 — CONTEXTS
+══════════════════════════════════════════ */
+.ctx-groups{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.ctx-group{border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm)}
+.ctx-group-hdr{padding:1rem 1.4rem;display:flex;align-items:center;gap:.75rem}
+.ctx-group-hdr h3{font-size:.9rem;font-weight:700;color:var(--white)}
+.ctx-group-hdr .g-badge{font-family:var(--fm);font-size:.65rem;background:rgba(255,255,255,.2);color:var(--white);border-radius:4px;padding:.1rem .45rem;margin-left:.4rem}
+.ctx-group-body{background:var(--white);padding:1rem 1.25rem;display:flex;flex-direction:column;gap:.8rem}
+.ctx-person{padding:.7rem .9rem;background:var(--cream);border-radius:10px;border-left:3px solid transparent;transition:background var(--t),transform var(--t)}
+.ctx-person:hover{background:var(--sand);transform:translateX(3px)}
+.ctx-person h4{font-size:.88rem;font-weight:700;color:var(--ink);margin-bottom:.2rem}
+.ctx-person .ctx-org{font-size:.76rem;font-style:italic;margin-bottom:.35rem}
+.ctx-person p{font-size:.8rem;color:var(--slate);line-height:1.55}
+.missing-note{font-family:var(--fm);font-size:.72rem;background:var(--amber-pale);border:1px solid var(--amber);border-radius:6px;padding:.4rem .7rem;color:var(--amber);margin-top:.25rem;display:inline-flex;align-items:center;gap:.3rem}
+
+/* ══════════════════════════════════════════
+   04 — FOUR LENSES TABS
+══════════════════════════════════════════ */
+.tabs-row{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:2rem}
+.tab-btn{
+  padding:.6rem 1.2rem;border-radius:50px;
+  border:2px solid transparent;background:var(--white);
+  color:var(--slate);font-weight:600;font-size:.85rem;cursor:pointer;
+  transition:all var(--t);font-family:var(--fb);
+  box-shadow:var(--sh-sm);
+}
+.tab-btn:hover{border-color:var(--teal-pale);color:var(--teal)}
+.tab-btn.active{background:var(--teal);color:var(--white);border-color:var(--teal)}
+
+.tab-panel{display:none;animation:fadeUp .32s var(--ease)}
+.tab-panel.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.lens-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:2rem;align-items:start}
+.lens-prose h3{font-family:var(--fh);font-size:1.25rem;margin-bottom:.85rem;color:var(--ink)}
+.lens-prose p{font-size:.9rem;color:var(--slate);line-height:1.78;margin-bottom:1rem}
+.theory-pill{
+  display:inline-flex;align-items:center;gap:.4rem;
+  background:var(--teal-pale);border:1px solid var(--teal-mid);
+  border-radius:6px;padding:.3rem .75rem;
+  font-size:.73rem;color:var(--teal);font-weight:600;margin-top:.3rem;line-height:1.4;
+}
+
+.quote-card{
+  background:var(--white);border-radius:var(--r);
+  padding:1.15rem 1.35rem;margin-bottom:.85rem;
+  border-left:3px solid var(--teal);box-shadow:var(--sh-sm);
+  transition:box-shadow var(--t),transform var(--t);
+}
+.quote-card:hover{box-shadow:var(--sh-md);transform:translateY(-2px)}
+.quote-card blockquote{font-size:.875rem;color:var(--ink);font-style:italic;line-height:1.65;margin-bottom:.5rem}
+.quote-card cite{font-size:.75rem;color:var(--teal);font-weight:700;font-style:normal;font-family:var(--fm);display:flex;align-items:center;gap:.4rem}
+.cite-group{display:inline-block;background:var(--teal);color:var(--white);border-radius:4px;padding:.05rem .4rem;font-size:.65rem}
+.cite-group.b{background:var(--berry)}
+.cite-group.missing{background:var(--amber);font-size:.62rem}
+
+/* Artefact mosaic */
+.artefact-mosaic{display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem}
+.a-tile{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--r);padding:1.1rem;
+  transition:box-shadow var(--t),transform var(--t),border-color var(--t);
+  cursor:default;
+}
+.a-tile:hover{box-shadow:var(--sh-sm);transform:translateY(-2px);border-color:var(--teal-pale)}
+.a-emoji{font-size:1.6rem;margin-bottom:.5rem;display:block}
+.a-tile h4{font-size:.82rem;font-weight:700;margin-bottom:.25rem}
+.a-tile p{font-size:.76rem;color:var(--muted);line-height:1.5}
+.a-tile .a-who{font-size:.7rem;color:var(--teal);font-family:var(--fm);margin-top:.4rem}
+
+/* ══════════════════════════════════════════
+   05 — VENN DIAGRAM SECTION (DARK)
+══════════════════════════════════════════ */
+.venn-wrap{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center}
+.venn-quotes{display:flex;flex-direction:column;gap:1rem}
+.dark-quote{
+  background:rgba(255,255,255,.055);
+  border-left:3px solid var(--teal-mid);
+  border-radius:0 var(--r) var(--r) 0;
+  padding:1rem 1.25rem;
+  transition:background var(--t);
+}
+.dark-quote:hover{background:rgba(255,255,255,.09)}
+.dark-quote blockquote{font-size:.875rem;color:var(--white);font-style:italic;line-height:1.65;margin-bottom:.4rem}
+.dark-quote cite{font-size:.74rem;color:var(--teal-mid);font-family:var(--fm);font-style:normal;display:flex;align-items:center;gap:.35rem}
+
+/* ══════════════════════════════════════════
+   06 — SEVEN THEMES (Accordion)
+══════════════════════════════════════════ */
+.themes-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.theme-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--r-lg);overflow:hidden;
+  transition:box-shadow var(--t);
+}
+.theme-card:hover{box-shadow:var(--sh-md)}
+.theme-toggle{
+  width:100%;background:none;border:none;cursor:pointer;
+  padding:1.2rem 1.4rem;display:flex;align-items:flex-start;gap:.85rem;
+  text-align:left;font-family:var(--fb);
+  transition:background var(--t);
+}
+.theme-toggle:hover{background:var(--sand)}
+.theme-n{
+  width:28px;height:28px;border-radius:7px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--fm);font-size:.75rem;font-weight:700;color:var(--white);
+}
+.theme-toggle-text{flex:1}
+.theme-toggle-text h3{font-size:.9rem;font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:.2rem}
+.theme-toggle-text p{font-size:.78rem;color:var(--muted);line-height:1.4}
+.theme-chevron{flex-shrink:0;transition:transform .25s;margin-top:.2rem;color:var(--muted)}
+.theme-toggle[aria-expanded="true"] .theme-chevron{transform:rotate(180deg)}
+.theme-body{display:none;padding:0 1.4rem 1.25rem}
+.theme-body.open{display:block;animation:fadeUp .25s var(--ease)}
+.theme-body p{font-size:.875rem;color:var(--slate);line-height:1.72}
+.theme-body .evidence{margin-top:.85rem;padding:.9rem 1rem;background:var(--sand);border-radius:10px;font-size:.82rem;color:var(--ink);font-style:italic;line-height:1.6;border-left:3px solid var(--teal)}
+.theme-body .evidence cite{font-style:normal;font-size:.73rem;color:var(--teal);font-family:var(--fm);display:block;margin-top:.3rem;font-weight:600}
+
+/* ══════════════════════════════════════════
+   07 — SIMILARITIES / DIFFERENCES TOGGLE
+══════════════════════════════════════════ */
+.pair-toggle{display:flex;gap:.4rem;background:var(--white);border-radius:50px;padding:.3rem;width:fit-content;box-shadow:var(--sh-sm);margin-bottom:2.5rem}
+.pair-btn{padding:.5rem 1.2rem;border-radius:50px;border:none;background:transparent;color:var(--slate);font-weight:600;font-size:.875rem;cursor:pointer;font-family:var(--fb);transition:background var(--t),color var(--t)}
+.pair-btn.active{background:var(--teal);color:var(--white)}
+.comp-panel{display:none;animation:fadeUp .28s var(--ease)}
+.comp-panel.active{display:block}
+
+.sim-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem}
+.sim-card{background:var(--white);border-radius:var(--r-lg);padding:1.75rem;box-shadow:var(--sh-sm);transition:box-shadow var(--t),transform var(--t);position:relative;overflow:hidden}
+.sim-card:hover{box-shadow:var(--sh-md);transform:translateY(-3px)}
+.sim-num{font-family:var(--fh);font-size:4.5rem;font-weight:700;line-height:1;margin-bottom:.6rem}
+.sim-card h3{font-size:.95rem;font-weight:700;margin-bottom:.6rem}
+.sim-card p{font-size:.875rem;color:var(--slate);line-height:1.68;margin-bottom:.7rem}
+.sim-theory{font-size:.76rem;color:var(--muted);font-style:italic;line-height:1.5}
+
+.diff-table-wrap{overflow-x:auto;border-radius:var(--r-lg);box-shadow:var(--sh-sm)}
+table{width:100%;border-collapse:collapse;background:var(--white);min-width:700px}
+thead th{background:var(--ink);color:var(--white);padding:.9rem 1rem;text-align:left;font-size:.8rem;font-weight:700;letter-spacing:.04em;vertical-align:top}
+thead th:first-child{border-radius:var(--r) 0 0 0}thead th:last-child{border-radius:0 var(--r) 0 0}
+tbody td{padding:.85rem 1rem;font-size:.84rem;color:var(--slate);border-bottom:1px solid rgba(24,41,47,.06);vertical-align:top}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:rgba(27,110,97,.04)}
+tbody td:first-child{font-weight:700;color:var(--ink);font-size:.8rem}
+.ct{display:inline-block;padding:.15rem .55rem;border-radius:4px;font-size:.7rem;font-weight:700;margin-bottom:.25rem}
+
+/* ══════════════════════════════════════════
+   08 — INTERACTIVE CHART (Canvas)
+══════════════════════════════════════════ */
+.chart-section{background:var(--sand)}
+.chart-wrap{background:var(--white);border-radius:var(--r-lg);padding:2rem;box-shadow:var(--sh-sm)}
+.chart-wrap h3{font-size:1rem;font-weight:700;margin-bottom:.4rem}
+.chart-wrap p{font-size:.85rem;color:var(--muted);margin-bottom:1.5rem}
+canvas{width:100%!important;border-radius:8px}
+
+/* ══════════════════════════════════════════
+   09 — DESIGN PROCESS TIMELINE
+══════════════════════════════════════════ */
+.timeline{position:relative;padding-left:2.5rem;margin-top:1rem}
+.timeline::before{content:'';position:absolute;left:.6rem;top:.5rem;bottom:.5rem;width:2px;background:linear-gradient(to bottom,var(--teal),var(--amber))}
+.tl-item{position:relative;margin-bottom:2rem}
+.tl-dot{position:absolute;left:-2rem;top:.3rem;width:14px;height:14px;border-radius:50%;border:2px solid var(--white);box-shadow:0 0 0 2px var(--teal)}
+.tl-content{background:var(--white);border-radius:var(--r);padding:1.1rem 1.25rem;box-shadow:var(--sh-sm);transition:box-shadow var(--t),transform var(--t)}
+.tl-content:hover{box-shadow:var(--sh-md);transform:translateX(4px)}
+.tl-phase{font-family:var(--fm);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.3rem;font-weight:600}
+.tl-content h4{font-size:.9rem;font-weight:700;margin-bottom:.3rem}
+.tl-content p{font-size:.83rem;color:var(--slate);line-height:1.6}
+.tl-participants{display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.5rem}
+.tl-tag{font-size:.7rem;background:var(--sand);border-radius:4px;padding:.1rem .45rem;color:var(--slate);font-weight:500}
+
+/* ══════════════════════════════════════════
+   10 — IMPLICATIONS
+══════════════════════════════════════════ */
+.imp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem}
+.imp-card{border-radius:var(--r-lg);padding:2rem 1.6rem;position:relative;overflow:hidden;transition:transform var(--t),box-shadow var(--t);cursor:default}
+.imp-card:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
+.imp-num{position:absolute;bottom:-1rem;right:.25rem;font-family:var(--fh);font-size:5.5rem;font-weight:700;opacity:.1;line-height:1;pointer-events:none}
+.imp-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
+.imp-card h3{font-size:.95rem;font-weight:700;margin-bottom:.65rem;line-height:1.35}
+.imp-card p{font-size:.875rem;line-height:1.68;position:relative;z-index:1}
+
+/* ══════════════════════════════════════════
+   11 — QUIZ
+══════════════════════════════════════════ */
+.quiz-section{background:var(--ink)}
+.quiz-wrap{max-width:740px;margin:0 auto}
+.quiz-q{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);padding:1.75rem;margin-bottom:1.25rem}
+.quiz-q p.qtext{font-size:.95rem;color:var(--white);font-weight:600;margin-bottom:1.1rem;line-height:1.5}
+.quiz-options{display:flex;flex-direction:column;gap:.5rem}
+.quiz-opt{
+  display:flex;align-items:flex-start;gap:.75rem;
+  background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.1);
+  border-radius:10px;padding:.85rem 1rem;cursor:pointer;
+  transition:background var(--t),border-color var(--t);
+  font-family:var(--fb);font-size:.875rem;color:rgba(255,255,255,.85);
+  text-align:left;width:100%;
+}
+.quiz-opt:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.22)}
+.quiz-opt:focus{outline:3px solid var(--amber);outline-offset:2px}
+.quiz-opt.correct{background:rgba(39,161,142,.2)!important;border-color:var(--teal-mid)!important;color:var(--white)!important}
+.quiz-opt.wrong{background:rgba(122,40,64,.2)!important;border-color:var(--berry)!important;color:var(--white)!important}
+.quiz-opt.reveal-correct{background:rgba(39,161,142,.15)!important;border-color:var(--teal-mid)!important;color:var(--white)!important}
+.opt-letter{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.78rem;flex-shrink:0;font-family:var(--fm)}
+.quiz-feedback{display:none;margin-top:.85rem;padding:.9rem 1.1rem;border-radius:10px;font-size:.85rem;line-height:1.6}
+.quiz-feedback.show{display:block}
+.quiz-feedback.ok{background:rgba(39,161,142,.18);color:var(--teal-pale)}
+.quiz-feedback.no{background:rgba(122,40,64,.18);color:#F0A0B0}
+.quiz-reset{display:block;margin:1.5rem auto 0;padding:.7rem 1.8rem;background:var(--teal);color:var(--white);border:none;border-radius:50px;font-weight:700;font-size:.9rem;cursor:pointer;font-family:var(--fb);transition:background var(--t);display:none}
+.quiz-reset:hover{background:var(--teal-mid)}
+.quiz-score{font-family:var(--fh);font-size:2rem;color:var(--amber);text-align:center;font-style:italic;margin-top:1.5rem;display:none}
+
+/* ══════════════════════════════════════════
+   12 — AI REFLECTION
+══════════════════════════════════════════ */
+.ai-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-bottom:2.5rem}
+.ai-col{border-radius:var(--r-lg);padding:1.75rem;transition:transform var(--t)}
+.ai-col:hover{transform:translateY(-3px)}
+.ai-col-hdr{display:flex;align-items:center;gap:.7rem;margin-bottom:1.1rem;padding-bottom:.75rem;border-bottom:1px solid rgba(255,255,255,.1)}
+.ai-col-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.ai-col h3{font-size:.9rem;font-weight:700;color:var(--white)}
+.ai-item{display:flex;gap:.55rem;margin-bottom:.75rem;align-items:flex-start}
+.ai-bullet{font-weight:700;flex-shrink:0;font-size:.9rem;margin-top:.1rem}
+.ai-item p{font-size:.84rem;color:rgba(255,255,255,.76);line-height:1.6}
+
+/* Accordion corrections */
+.acc-item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--r);margin-bottom:.65rem;overflow:hidden}
+.acc-toggle{width:100%;background:none;border:none;color:var(--white);padding:.95rem 1.2rem;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-family:var(--fb);font-size:.875rem;font-weight:600;text-align:left;transition:background var(--t)}
+.acc-toggle:hover{background:rgba(255,255,255,.05)}
+.acc-toggle[aria-expanded="true"]{color:var(--teal-mid)}
+.acc-chevron{flex-shrink:0;transition:transform .25s}
+.acc-toggle[aria-expanded="true"] .acc-chevron{transform:rotate(180deg)}
+.acc-body{display:none;padding:0 1.2rem 1.2rem}
+.acc-body.open{display:block;animation:fadeUp .22s var(--ease)}
+.diff-cols{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:.75rem}
+.diff-col h5{font-family:var(--fm);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.4rem}
+.diff-col.orig h5{color:var(--muted)}.diff-col.rev h5{color:var(--teal-mid)}
+.diff-col p{font-size:.83rem;line-height:1.62;color:rgba(255,255,255,.72)}
+.diff-col.rev p mark{background:rgba(39,161,142,.22);color:var(--teal-pale);border-radius:3px;padding:0 2px}
+.diff-col.orig p s{color:var(--muted);text-decoration-color:var(--berry)}
+
+/* ══════════════════════════════════════════
+   13 — REFERENCES
+══════════════════════════════════════════ */
+.ref-list{list-style:none}
+.ref-list li{padding:1rem 0;border-bottom:1px solid var(--border);font-size:.875rem;color:var(--slate);line-height:1.7;display:flex;gap:.75rem;align-items:flex-start}
+.ref-list li:last-child{border-bottom:none}
+.ref-n{font-family:var(--fm);font-size:.7rem;color:var(--teal);background:var(--teal-pale);border-radius:4px;padding:.1rem .45rem;flex-shrink:0;margin-top:.15rem;font-weight:600}
+.ref-list a{color:var(--teal);word-break:break-all}
+.ref-list a:hover{text-decoration:underline}
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+footer{background:var(--ink);color:var(--muted);text-align:center;padding:2.5rem 2rem;font-size:.8rem;line-height:1.7}
+footer a{color:var(--teal-pale);text-decoration:none}
+footer a:hover{color:var(--white)}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media(max-width:900px){
+  .hero-inner,.venn-wrap,.ctx-groups,.lens-grid,.diff-cols{grid-template-columns:1fr}
+  .ai-cols,.themes-grid{grid-template-columns:1fr}
+  .participant-grid{grid-template-columns:1fr}
+  .artefact-mosaic{grid-template-columns:repeat(2,1fr)}
+  .nav-links{display:none}
+  .ctx-groups{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+  .section{padding:3.5rem 1.25rem}
+  .imp-grid{grid-template-columns:1fr}
+  .sim-grid{grid-template-columns:1fr}
+  .artefact-mosaic{grid-template-columns:1fr 1fr}
+  .hero-h1{font-size:1.7rem}
+}
+@media print{
+  nav,#prog,.hero-ctas,.tabs-row,.pair-toggle,.quiz-section{display:none!important}
+  .tab-panel,.comp-panel,.acc-body,.theme-body{display:block!important}
+  section{page-break-inside:avoid}
+}
+
+
+.audio-block{background:linear-gradient(180deg,#ffffff 0%, #fbfcfc 100%);border:1px solid rgba(24,41,47,.09);border-radius:18px;padding:1rem 1.1rem 1.05rem;margin:1rem 0 1.5rem;box-shadow:0 8px 24px rgba(24,41,47,.08);position:relative;overflow:hidden}
+.audio-block:before{content:'';position:absolute;left:0;top:0;right:0;height:4px;background:linear-gradient(90deg,var(--teal),var(--teal-mid),var(--amber))}
+.audio-block p{font-size:.84rem;color:var(--ink);margin-bottom:.65rem}
+.audio-block audio{width:100%;margin-bottom:.8rem;border-radius:999px;filter:drop-shadow(0 2px 8px rgba(24,41,47,.08))}
+.audio-block details{background:var(--sand);border-radius:12px;padding:.72rem .9rem;border:1px solid rgba(24,41,47,.05)}
+.audio-block summary{cursor:pointer;font-weight:700;color:var(--teal);list-style:none}
+.audio-block summary::-webkit-details-marker{display:none}
+.audio-block summary:after{content:'+';float:right;color:var(--teal-mid);font-weight:700}
+.audio-block details[open] summary:after{content:'–'}
+.audio-block details p{margin-top:.6rem;font-size:.82rem;color:var(--slate);line-height:1.7}
+.audio-block:hover{box-shadow:0 10px 28px rgba(24,41,47,.12)}
+.bridge-note,.synthesis-note,.method-synthesis,.chart-method-note,.chart-instruction-banner,.chart-help-box,.reference-note,.narrator-note,.spectrum-wrap{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:1rem 1.15rem;box-shadow:var(--sh-sm)}
+.bridge-note,.synthesis-note,.method-synthesis,.chart-method-note,.chart-instruction-banner,.chart-help-box,.reference-note,.narrator-note{margin:1rem 0 1.25rem}
+.bridge-note p,.synthesis-note p,.method-synthesis p,.chart-method-note p,.chart-instruction-banner p,.chart-help-box p,.reference-note p,.narrator-note p{font-size:.86rem;color:var(--slate);line-height:1.72}
+.bridge-note strong,.synthesis-note strong,.method-synthesis strong,.chart-method-note strong,.chart-instruction-banner strong,.chart-help-box strong,.reference-note strong,.narrator-note strong{color:var(--ink)}
+.chart-help-box h4{font-size:.86rem;color:var(--teal);margin-bottom:.35rem}
+.chart-caption{font-size:.82rem;color:var(--muted)!important;line-height:1.6;margin-top:.75rem}
+.legend-tip-pulse{animation:legendTipPulse .9s ease-in-out 3}
+@keyframes legendTipPulse{0%{transform:scale(1);box-shadow:var(--sh-sm)}50%{transform:scale(1.015);box-shadow:var(--sh-md)}100%{transform:scale(1);box-shadow:var(--sh-sm)}}
+
+.spectrum-wrap{padding:1.45rem 1.4rem 1.2rem}
+.spectrum-wrap h3{display:flex;align-items:center;gap:.6rem;margin-bottom:.45rem}
+.spectrum-wrap h3 .spectrum-title-icon{width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;background:linear-gradient(135deg,var(--teal-pale),#f1e2cc)}
+.spectrum-wrap > p{color:var(--slate);max-width:860px}
+.spectrum-scale{display:flex;justify-content:space-between;align-items:center;font-size:.86rem;font-weight:700;color:var(--slate);margin:1rem 0 .65rem}
+.spectrum-scale span{display:inline-flex;align-items:center;gap:.45rem}
+.spectrum-scale svg{width:18px;height:18px;flex-shrink:0}
+.spectrum{position:relative;height:330px;border-radius:32px;background:linear-gradient(90deg,#9ad7d0 0%, #c8d6c8 56%, #efd1af 100%);overflow:hidden;padding:0 1rem}
+.spectrum-track{position:absolute;left:1.25rem;right:1.25rem;top:156px;height:6px;border-radius:999px;background:rgba(255,255,255,.72);box-shadow:inset 0 0 0 1px rgba(24,41,47,.06)}
+.s-point{position:absolute;transform:translateX(-50%);text-align:center;width:142px}
+.s-point.top{top:42px}
+.s-point.bottom{top:182px}
+.s-point .s-badge{display:inline-flex;align-items:center;gap:.35rem;padding:.38rem .68rem;border-radius:999px;font-size:.82rem;font-weight:700;color:var(--white);font-family:var(--fb);white-space:nowrap;box-shadow:var(--sh-sm)}
+.s-point .s-badge svg{width:14px;height:14px;flex-shrink:0}
+.s-point small{display:flex;flex-direction:column;gap:.02rem;align-items:center;margin-top:.42rem;font-size:.74rem;color:var(--slate);line-height:1.28;font-weight:600}
+.s-point:after{content:'';position:absolute;left:50%;transform:translateX(-50%);width:2px;background:rgba(24,41,47,.22)}
+.s-point.top:after{top:34px;height:84px}
+.s-point.bottom:after{top:-68px;height:68px}
+.spectrum-note{margin-top:.95rem}
+.spectrum-note strong{color:var(--ink)}
+.spectrum-legend-note{display:flex;gap:.55rem;align-items:flex-start;margin-top:.8rem;padding:.8rem .9rem;background:var(--sand);border:1px solid rgba(24,41,47,.06);border-radius:12px}
+.spectrum-legend-note svg{width:18px;height:18px;flex-shrink:0;margin-top:.12rem;color:var(--teal)}
+.spectrum-legend-note p{font-size:.8rem;color:var(--slate);line-height:1.55;margin:0}
+@media(max-width:900px){
+  .spectrum{height:360px}
+  .spectrum-track{top:170px}
+  .s-point{width:118px}
+  .s-point.top{top:42px}
+  .s-point.bottom{top:210px}
+  .s-point small{font-size:.7rem}
+}
+@media(max-width:700px){
+  .spectrum{height:560px;padding:0 .55rem}
+  .spectrum-track{top:278px;left:.9rem;right:.9rem}
+  .s-point{width:110px}
+  .s-point.top{top:54px}
+  .s-point.bottom{top:320px}
+  .s-point.top:after{top:34px;height:208px}
+  .s-point.bottom:after{top:-210px;height:210px}
+  .spectrum-scale{font-size:.76rem}
+  .spectrum-scale svg{width:16px;height:16px}
+}
+
+
+
+.interview-framework,.engagement-note,.accessibility-statement{background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.2rem 1.3rem;box-shadow:var(--sh-sm);margin:0 0 1.25rem}
+.interview-framework h3,.engagement-note h3,.accessibility-statement h3{font-family:var(--fh);font-size:1.08rem;color:var(--ink);margin-bottom:.45rem}
+.interview-framework p,.engagement-note p,.accessibility-statement p{font-size:.86rem;color:var(--slate);line-height:1.72;margin-bottom:.6rem}
+.interview-framework ul{margin:.4rem 0 0 1.1rem}
+.interview-framework li{font-size:.84rem;color:var(--slate);line-height:1.68;margin:.28rem 0}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<div aria-label="Reading progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" id="prog" role="progressbar"></div>
+<!-- ═══════════ NAV ═══════════ -->
+<nav aria-label="Main navigation">
+<a aria-label="Home — Group 3 Learning Design Artefact" class="nav-brand" href="#hero">Group 3 · LD Contexts</a>
+<ul class="nav-links" role="list">
+<li><a href="#methodology">Method</a></li>
+<li><a href="#contexts">Contexts</a></li>
+<li><a href="#lenses">4 Lenses</a></li>
+<li><a href="#themes">7 Themes</a></li>
+<li><a href="#patterns">Patterns</a></li>
+<li><a href="#process">Process</a></li>
+<li><a href="#implications">Implications</a></li>
+<li><a href="#quiz">Quiz</a></li>
+<li><a href="#ai-reflection">AI</a></li>
+<li><a href="#conclusion">Conclusion</a></li><li><a href="#references">Refs</a></li>
+</ul>
+</nav>
+<main id="main">
+<!-- ═══════════════════════════════════════
+     HERO
+═══════════════════════════════════════ -->
+<section aria-labelledby="hero-h1" id="hero">
+<svg aria-hidden="true" class="hero-bg" preserveaspectratio="xMidYMid slice" viewbox="0 0 1200 700">
+<circle cx="980" cy="60" fill="none" opacity=".15" r="350" stroke="#27A18E" stroke-width="1"></circle>
+<circle cx="980" cy="60" fill="none" opacity=".1" r="220" stroke="#27A18E" stroke-width="1"></circle>
+<circle cx="80" cy="650" fill="#1B6E61" opacity=".07" r="220"></circle>
+<circle cx="320" cy="520" fill="#B8742A" opacity=".07" r="90"></circle>
+<circle cx="600" cy="350" fill="none" opacity=".08" r="400" stroke="#B8742A" stroke-width=".5"></circle>
+</svg>
+<div class="hero-inner">
+<div>
+<p class="hero-kicker">EDN4601 · Introduction to Learning Design · Group 3 · UCT 2026</p>
+<h1 class="hero-h1" id="hero-h1">Learning Design<br/><em>Across Contexts</em></h1>
+<p class="hero-sub">How does learning design appear as a <strong style="color:var(--white)">role, practice, artefact, and field of study</strong> across six practitioners in two focus groups? A qualitative synthesis informed by AI-assisted analysis and postdigital, access, and social justice frameworks.</p><div aria-labelledby="audio-introduction_hero-label" class="audio-block"><p id="audio-introduction_hero-label"><strong>Audio narration:</strong> Introduction</p><audio controls="" preload="none"><source src="introduction_hero.mp3" type="audio/mpeg"/>Your browser does not support the audio element.</audio><details><summary>Read transcript</summary><p>Welcome to our Group 3 artefact for EDN4601, Introduction to Learning Design. Our central question is simple but surprisingly slippery: how does learning design appear as a role, a practice, an artefact, and a field of study across very different contexts? To explore that, we conducted two focus groups with six practitioners working across higher education, government education, freelance and publishing, design support, and disciplinary teaching. Across both groups, one pattern became clear: learning design is defined less by job title and more by what people actually do. In every context, it involves mediating between content, learner needs, institutional constraints, and available technologies. This artefact brings those six voices together, relates them to classroom discussions and course theory, and shows how context shapes what learning design becomes.</p></details></div>
+<div class="hero-ctas">
+<a class="btn-primary" href="#methodology">
+          Begin
+          <svg aria-hidden="true" fill="none" height="15" stroke="currentColor" stroke-linecap="round" stroke-width="2.5" viewbox="0 0 24 24" width="15"><path d="M12 5v14M5 12l7 7 7-7"></path></svg>
+</a>
+<a class="btn-ghost" href="#quiz">Take the quiz</a>
+</div>
+</div>
+<div aria-label="Six participants across two focus groups">
+<span class="group-label">Group A — 6 March 2026</span>
+<div class="participant-grid" style="margin-bottom:1rem">
+<div class="p-chip"><span class="p-dot" style="background:var(--teal-mid)"></span><div><div class="p-chip-role">Bilqis Deaney</div><div class="p-chip-org">Learning Technologist · Cambridge UP&amp;A</div></div></div>
+<div class="p-chip"><span class="p-dot" style="background:var(--berry)"></span><div><div class="p-chip-role">Megan Landman</div><div class="p-chip-org">Head of Online Prog. · Animation School</div></div></div>
+<div class="p-chip" style="grid-column:1/-1"><span class="p-dot" style="background:var(--amber)"></span><div><div class="p-chip-role">Lizeka Portia Pango</div><div class="p-chip-org">E-Learning Advisor · EC Dept. of Education</div></div></div>
+</div>
+<span class="group-label">Group B — 6 March 2026 · Transcript available</span>
+<div class="participant-grid">
+<div class="p-chip"><span class="p-dot" style="background:#4A90D9"></span><div><div class="p-chip-role">Jack Bailey</div><div class="p-chip-org">Learning Experience Designer · University</div></div></div>
+<div class="p-chip"><span class="p-dot" style="background:#9B59B6"></span><div><div class="p-chip-role">Mduduzi Khumalo</div><div class="p-chip-org">Graphic Designer · works with IDs</div></div></div>
+<div class="p-chip" style="grid-column:1/-1"><span class="p-dot" style="background:#E67E22"></span><div><div class="p-chip-role">Dr Nkosi</div><div class="p-chip-org">Lecturer · Engineering (Higher Education)</div></div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- ═══════════════════════════════════════
+     01 — METHODOLOGY
+═══════════════════════════════════════ -->
+<section aria-labelledby="meth-h" class="section" id="methodology">
+<div class="inner">
+<p aria-hidden="true" class="section-label">01 · Methodology</p>
+<h2 class="section-h" id="meth-h">Research Question &amp; Approach</h2>
+<div class="interview-framework reveal">
+<h3>Interview Design Framework</h3>
+<p>The focus group questions were deliberately structured around the four course lenses of learning design: <strong>role, practice, artefact, and field of study</strong>. The sequence moved from broad professional context to specific examples, allowing participants first to situate their work institutionally and then to reflect on design processes, outputs, theoretical influences, access conditions, and evaluation.</p>
+<p>This progression aligned with the task objective and encouraged detailed, open-ended responses rather than short definitional answers.</p>
+<ul>
+<li><strong>Role:</strong> How is learning design positioned in your institution or professional responsibilities?</li>
+<li><strong>Practice:</strong> Can you talk us through what happens when you design or redesign a learning experience?</li>
+<li><strong>Artefact:</strong> What kinds of outputs, resources, or learning products emerge from your design work?</li>
+<li><strong>Field of study:</strong> What theories, standards, frameworks, or professional learning shape your design decisions?</li>
+</ul>
+</div>
+<div class="engagement-note reveal">
+<h3>Interview Engagement and Facilitation</h3>
+<p>The discussions were conducted in a respectful, conversational manner, with participants building on one another’s examples and using follow-up prompts to deepen reflection. Questions such as <em>“Can you give an example?”</em>, <em>“How does that work in practice?”</em>, and <em>“Who has final approval?”</em> helped move the conversation from description to elaboration.</p>
+<p>That interaction mattered analytically. It surfaced differences in autonomy, learner proximity, quality assurance, accessibility, and institutional constraint that would have remained hidden in shorter or more closed questioning formats.</p>
+</div>
+
+<div class="rq-box reveal">
+<p>"How does learning design appear as a role, practice, artefact, and field of study across different educational contexts?"</p>
+<span class="rq-tag">Core Research Question — EDN4601 Group 3 Assessment, 2026</span>
+</div><div class="method-synthesis reveal"><p>Conducting two separate focus groups created an unexpected analytical advantage. Group A was more self-facilitated, while Group B was more structured. Despite those differences, both groups independently converged on the same core insight: learning design is defined less by what you are called and more by what you do. That convergence across sectors, institutional types, and employment models strengthens the claim that our findings reflect genuine patterns rather than one group’s framing.</p></div><div aria-labelledby="audio-methodology-label" class="audio-block"><p id="audio-methodology-label"><strong>Audio narration:</strong> Methodology</p><audio controls="" preload="none"><source src="methodology.mp3" type="audio/mpeg"/>Your browser does not support the audio element.</audio><details><summary>Read transcript</summary><p>Our data comes from two separate focus groups within the same assignment group. Group A was more self-facilitated, while Group B was more structured. That difference turned out to be useful rather than a problem, because both groups converged on similar findings despite the different formats. Conducting two separate focus groups created an unexpected analytical advantage: both groups independently converged on the same core insight, that learning design is defined less by what you are called and more by what you do. After recording and transcribing the discussions, we used AI to help identify themes and contrasts, but we did not simply accept the outputs. We checked the claims against the transcripts, corrected overstatements, and refined the analysis. That matters methodologically: it shows AI as a support for qualitative analysis, not a substitute for human interpretation.</p></details></div>
+<div class="method-grid">
+<div class="method-card reveal d1" data-n="1">
+<div aria-hidden="true" class="method-icon"><svg fill="none" height="18" stroke="white" stroke-linecap="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+<h3>Two Focus Groups</h3>
+<p><strong>Group A</strong> (Bilqis, Megan, Lizeka) — self-facilitated, 6 March 2026. <strong>Group B</strong> (Jack, Mduduzi, Dr Nkosi) — focus group date and facilitator not confirmed from available files.</p>
+</div>
+<div class="method-card reveal d2" data-n="2">
+<div aria-hidden="true" class="method-icon"><svg fill="none" height="18" stroke="white" stroke-linecap="round" stroke-width="2" viewbox="0 0 24 24" width="18"><rect height="14" rx="2" width="20" x="2" y="3"></rect><path d="M8 21h8M12 17v4"></path></svg></div>
+<h3>AI-Assisted Analysis</h3>
+<p>Both transcripts submitted to AI (Claude/Copilot). Seven themes identified, structured around the four analytical lenses. All interactions logged and submitted as Item 3.</p>
+</div>
+<div class="method-card reveal d3" data-n="3">
+<div aria-hidden="true" class="method-icon"><svg fill="none" height="18" stroke="white" stroke-linecap="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M9 12l2 2 4-4"></path><circle cx="12" cy="12" r="10"></circle></svg></div>
+<h3>Human Verification</h3>
+<p>Group compared each AI claim against source transcripts. Three significant errors identified, corrected, and documented in a two-column comparison table in the AI interaction log.</p>
+</div>
+<div class="method-card reveal d4" data-n="4">
+<div aria-hidden="true" class="method-icon"><svg fill="none" height="18" stroke="white" stroke-linecap="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg></div>
+<h3>Theoretical Synthesis</h3>
+<p>Findings interpreted through Fawns (2019, 2022), Gachago et al. (2025), Roberts &amp; Hernandez (2019), and Immenga's four-facets framework from the EDN4601 Week 1 webinar.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- ═══════════════════════════════════════
+     02 — CONTEXTS
+═══════════════════════════════════════ -->
+<section aria-labelledby="ctx-h" class="section section-alt" id="contexts">
+<div class="inner">
+<p aria-hidden="true" class="section-label">02 · Contexts</p>
+<h2 class="section-h" id="ctx-h">Six Practitioners, Six Worlds</h2>
+<p class="section-lead">Context is not background — it fundamentally shapes what learning design becomes. Before analysis, we must understand who our participants are and the institutional ecologies they inhabit.</p><div aria-labelledby="audio-contexts-label" class="audio-block"><p id="audio-contexts-label"><strong>Audio narration:</strong> Contexts</p><audio controls="" preload="none"><source src="contexts.mp3" type="audio/mpeg"/>Your browser does not support the audio element.</audio><details><summary>Read transcript</summary><p>Our six participants work in very different institutional worlds. Bilqis works as a learning technologist, translating subject matter intentions into structured LMS experiences. Megan leads online programme development in a private animation school and is trying to convert a hands-on diploma into an online format. Lizeka works in the Eastern Cape Department of Education, where the digital divide is not background noise but a central design condition. Jack works as a learning experience designer supporting lecturers at university level. Mduduzi brings a graphic design and accessibility lens to instructional design teams. And Dr Nkosi designs learning within the highly regulated space of engineering education. Put together, these contexts show that learning design is never context free; it is shaped by infrastructure, policy, accreditation, and proximity to learners.</p></details></div>
+<div class="ctx-groups reveal">
+<!-- GROUP A -->
+<div class="ctx-group" style="box-shadow:var(--sh-sm)">
+<div class="ctx-group-hdr" style="background:var(--teal)">
+<svg aria-hidden="true" fill="none" height="20" stroke="white" stroke-linecap="round" stroke-width="2" viewbox="0 0 24 24" width="20"><circle cx="12" cy="8" r="4"></circle><path d="M4 20v-1a8 8 0 0 1 16 0v1"></path></svg>
+<h3>Group A<span class="g-badge">6 March 2026 · Full transcript available</span></h3>
+</div>
+<div class="ctx-group-body">
+<div class="ctx-person" style="border-color:var(--teal)">
+<h4>Bilqis Deaney</h4>
+<div class="ctx-org" style="color:var(--teal)">Learning Technologist · Cambridge University Press &amp; Assessment</div>
+<p>Translates SME intentions into structured LMS experiences. Works on contract, with autonomy ranging from full creative control to prescriptive client briefs. Role sits explicitly "between pedagogy and technology."</p>
+</div>
+<div class="ctx-person" style="border-color:var(--berry)">
+<h4>Megan Landman</h4>
+<div class="ctx-org" style="color:var(--berry)">Head of Online Programme · Private Animation School</div>
+<p>Converting a contact-based vocational diploma to distance format. Enrolled in EDN4601 to build formal LD knowledge her institution currently lacks. Must demonstrate equivalence to CHE while asking: how do you deliver a clay workshop online?</p>
+</div>
+<div class="ctx-person" style="border-color:var(--amber)">
+<h4>Lizeka Portia Pango</h4>
+<div class="ctx-org" style="color:var(--amber)">E-Learning Advisor · Eastern Cape Department of Education</div>
+<p>Designs for teachers (not students), within a deep digital divide. Produces multilingual multimedia content, offline-capable workbooks, and data-informed micro-lessons. Online access is encouraged but not compulsory.</p>
+</div>
+</div>
+</div>
+<!-- GROUP B -->
+<div class="ctx-group" style="box-shadow:var(--sh-sm)">
+<div class="ctx-group-hdr" style="background:var(--slate)">
+<svg aria-hidden="true" fill="none" height="20" stroke="white" stroke-linecap="round" stroke-width="2" viewbox="0 0 24 24" width="20"><circle cx="12" cy="8" r="4"></circle><path d="M4 20v-1a8 8 0 0 1 16 0v1"></path></svg>
+<h3>Group B<span class="g-badge">6 March 2026 · Full transcript available</span></h3>
+</div>
+<div class="ctx-group-body">
+<div class="ctx-person" style="border-color:#4A90D9">
+<h4>Jack Bailey</h4>
+<div class="ctx-org" style="color:#4A90D9">Learning Experience Designer · Nelson Mandela University</div>
+<p>Works with lecturers to redesign activities, resources and assessments when students struggle with concepts. Uses Rise Articulate, embedded in their LMS "Funda." Identifies strongly with all four facets of LD. Notes Fawns's collaborative ideal is constrained because his team rarely interacts directly with students — feedback arrives via lecturers or anonymous module evaluations.</p>
+</div>
+<div class="ctx-person" style="border-color:#9B59B6">
+<h4>Mduduzi Khumalo</h4>
+<div class="ctx-org" style="color:#9B59B6">Graphic Designer · works with Instructional Designers</div>
+<p>Part of the LD ecosystem through infographics and multimedia — called in specifically when content is identified as difficult to understand. Has <strong>low to medium autonomy</strong>: the SME and ID decide whether to take his input. Has dedicated a master's degree to accessibility, is developing an accessibility support unit, and has submitted a paper for publication on WCAG compliance in educational materials.</p>
+</div>
+<div class="ctx-person" style="border-color:#E67E22">
+<h4>Dr Nkosi Nkululeko</h4>
+<div class="ctx-org" style="color:#E67E22">Lecturer · Chemical Engineering · Higher Education</div>
+<p>Acts as both subject expert and learning designer — no dedicated LD exists in his department. Designs through <strong>constructive alignment</strong>: linking learning outcomes, teaching activities, and assessments. Major curriculum changes require multi-tier approval from department, faculty, Engineering Council of South Africa (ECSA), and industry — described as "a no-go zone" due to the number of steps involved.</p>
+<p>Immenga’s four-facets framework helps reveal the complexity here. What appears to be one role is actually three overlapping functions: curriculum shaping under ECSA constraints, module-level design through constructive alignment, and direct teaching inside a regulated disciplinary context.</p></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ═══════════════════════════════════════
+     03 — FOUR LENSES TAB INTERFACE
+═══════════════════════════════════════ -->
+<section aria-labelledby="lens-h" class="section" id="lenses">
+<div class="inner">
+<p aria-hidden="true" class="section-label">03 · Four Lenses</p>
+<h2 class="section-h" id="lens-h">Learning Design Through Four Lenses</h2>
+<p class="section-lead">Christine Immenga's framework (EDN4601, Week 1 webinar) identifies learning design as simultaneously a <em>field of study</em>, a <em>professional role</em>, a <em>process</em>, and a <em>product</em>. Each lens illuminates different evidence from our data.</p><div aria-labelledby="audio-four_lenses_overview-label" class="audio-block"><p id="audio-four_lenses_overview-label"><strong>Audio narration:</strong> Four Lenses Overview</p><audio controls="" preload="none"><source src="four_lenses_overview.mp3" type="audio/mpeg"/>Your browser does not support the audio element.</audio><details><summary>Read transcript</summary><p>We used four lenses from the course to analyse the interviews: learning design as role, practice, artefact, and field of study. These lenses helped us move beyond a narrow definition of the learning designer as a fixed profession. Instead, they allowed us to ask four better questions: who is doing design work, what are they doing, what are they producing, and what theories, standards, or forms of scholarship shape that work? Across our data, these four lenses overlap rather than sit neatly apart. That overlap is one of the most important findings of the artefact.</p></details></div>
+<div aria-label="Four analytical lenses" class="tabs-row reveal" role="tablist">
+<button aria-controls="lp-role" aria-selected="true" class="tab-btn active" id="lt-role" role="tab">⬡ Role</button>
+<button aria-controls="lp-practice" aria-selected="false" class="tab-btn" id="lt-practice" role="tab">◎ Practice</button>
+<button aria-controls="lp-artefact" aria-selected="false" class="tab-btn" id="lt-artefact" role="tab">⬚ Artefact</button>
+<button aria-controls="lp-field" aria-selected="false" class="tab-btn" id="lt-field" role="tab">⊕ Field</button>
+</div>
+<!-- ROLE -->
+<div aria-labelledby="lt-role" class="tab-panel active" id="lp-role" role="tabpanel">
+<div class="lens-grid">
+<div class="lens-prose"><div aria-labelledby="audio-role-label" class="audio-block"><p id="audio-role-label"><strong>Audio narration:</strong> Role</p><audio controls="" preload="none"><source src="role.mp3" type="audio/mpeg"/>Your browser does not support the audio element.</audio><details><summary>Read transcript</summary><p>The role lens revealed that learning design is a distributed function rather than a single fixed profession. Bilqis occupies a specialist contracted role. Lizeka shares design responsibility with curriculum staff and subject specialists. Megan has effectively absorbed the role while also trying to build institutional structures around it. Jack works in a formal learning experience design role, while Mduduzi contributes through visual and accessibility design, and Dr Nkosi carries design responsibility within his teaching role because no dedicated designer exists in his department. Across both groups, the pattern is clear: learning design is less about a title and more about responsibility for shaping learning experiences under specific contextual conditions.</p></details></div>
+<h3>A Distributed, Not Singular, Role</h3>
+<p>Across all six participants, learning design as a role does not reside in one fixed position. It surfaces as a <strong>distributed function</strong> shaped by institutional context, employment model, and available expertise. Three patterns emerged: a <em>specialised dedicated role</em>, <em>distributed responsibility</em> across a team, and <em>design embedded in teaching</em>.</p>
+<p>Crucially, even the "specialised" role carries no single meaning. Bilqis's autonomy varies entirely by contract — sometimes fully prescribed, sometimes fully independent. The AI analysis initially framed this simply as "distributed between institutions," missing the employment model dimension entirely.</p>
+<div class="bridge-note"><p>Fawns’s (2022, p. 715) concept of entangled pedagogy is illuminating here because it resists the idea that any single stakeholder holds full agency over what learning becomes. In Bilqis’s case, autonomy is renegotiated with each new contract. In Jack’s case, final approval rests with the lecturer. In Dr Nkosi’s case, major changes require departmental, faculty, ECSA, and industry approval. Entangled pedagogy does not just name a philosophy; it describes the lived institutional reality of these participants.</p></div><div class="theory-pill">Fawns (2022, p. 715): "Agency is negotiated between teachers, students and other stakeholders" — never fixed in one role</div>
+</div>
+<div>
+<div class="quote-card">
+<blockquote>"My role basically sits between pedagogy and technology. In practice, I help design activities, assessments and learning interactions — and I also build these experiences technically on the LMS."</blockquote>
+<cite><span class="cite-group">Group A</span> Bilqis Deaney — Learning Technologist</cite>
+</div>
+<div class="quote-card" style="border-color:var(--amber)">
+<blockquote>"The role of learning design rests with the curriculum section... we share the responsibility with the subject specialist."</blockquote>
+<cite><span class="cite-group">Group A</span> Lizeka Portia Pango — E-Learning Advisor</cite>
+</div>
+<div class="quote-card" style="border-color:var(--berry)">
+<blockquote>"[The institution] hasn't fully realised the benefits of having a qualified learning designer in our organisation. But they're starting to."</blockquote>
+<cite><span class="cite-group">Group A</span> Megan Landman — Head of Online Programme</cite>
+</div>
+<div class="quote-card" style="border-color:#4A90D9;background:#F0F6FF">
+<blockquote>"I would say it's largely positioned as a support service for academic staff... However, I think it also could work as a practice... As well as an artifact... I would also say it's positioned as a field of study because the university encourages ongoing professional development — training, conferences, flexible study leave."</blockquote>
+<cite><span class="cite-group b" style="background:#4A90D9">Group B</span> Jack Bailey — Group B Focus Group, 6 March 2026</cite>
+</div>
+</div>
+</div>
+</div>
+<!-- PRACTICE -->
+<div aria-labelledby="lt-practice" class="tab-panel" id="lp-practice" role="tabpanel">
+<div class="lens-grid">
+<div class="lens-prose"><div aria-labelledby="audio-practice-label" class="audio-block"><p id="audio-practice-label"><strong>Audio narration:</strong> Practice</p><audio controls="" preload="none"><source src="practice.mp3" type="audio/mpeg"/>Your browser does not support the audio element.</audio><details><summary>Read transcript</summary><p>The practice lens showed the strongest convergence across all six voices. In different ways, every participant described learning design as mediation. Bilqis translates between subject experts and the LMS. Megan translates hands-on vocational teaching into online experience. Lizeka translates exam results and infrastructure realities into micro-lessons and offline-capable resources. Jack redesigns activities when lecturers identify learning problems. Mduduzi translates difficult concepts into accessible visual explanations. And Dr Nkosi aligns outcomes, teaching activities, and assessment inside engineering constraints. The medium changes, but the mediating function remains. That is where the practice lens connects strongly to postdigital and entangled views of pedagogy from the course.</p></details></div>
+<h3>Mediation Between Pedagogy, Technology &amp; Learner</h3>
+<p>Learning design as practice is fundamentally about <strong>mediation</strong> — navigating between pedagogical intent, technological possibility, and learner reality. No participant describes a linear, sequential process. All describe continuous negotiation.</p>
+<p>Bilqis uses XAPI analytics to adjust content release dates based on learner engagement patterns. Megan asks what "consolidation" means without a physical classroom. Lizeka produces offline workbooks when connectivity fails. Dr Nkosi links every design decision to constructive alignment between outcomes, activities, and assessments.</p>
+<div class="bridge-note"><p>A postdigital perspective helps us see why the same tools produce different educational realities. Moodle, H5P, video, and analytics are not the unit of analysis on their own. At Cambridge, Bilqis uses platform analytics to shape release decisions; in the Eastern Cape, Lizeka designs offline-capable workbooks because reliable access cannot be assumed. The postdigital lens shows that technology is always entangled with social, material, and infrastructural conditions.</p></div><div class="theory-pill">Fawns (2019): Postdigital perspective — digital tools are always embedded in social, material and contextual activity; technology and pedagogy mutually shape each other</div>
+</div>
+<div>
+<div class="quote-card">
+<blockquote>"I like to look at when students are engaging. Is there a particular day in the week where they get most of the work done? Because that also affects how you design courses."</blockquote>
+<cite><span class="cite-group">Group A</span> Bilqis Deaney</cite>
+</div>
+<div class="quote-card" style="border-color:var(--berry)">
+<blockquote>"How am I going to deliver that same learning experience [online]? What is consolidation? Is it just a crossword puzzle online? Is it a drag and drop? Is it a reflective discussion forum?"</blockquote>
+<cite><span class="cite-group">Group A</span> Megan Landman</cite>
+</div>
+<div class="quote-card" style="border-color:var(--amber)">
+<blockquote>"Given connectivity challenges in our district, I also design interactive workbooks and other digital assets that function without Internet."</blockquote>
+<cite><span class="cite-group">Group A</span> Lizeka Portia Pango</cite>
+</div>
+<div class="quote-card" style="border-color:#E67E22;background:#FFF8F0">
+<blockquote>"What I do in my learning design usually involves the constructive alignment, especially with the learning outcomes... It also involves the teaching activities in class that could be your quiz, questions during the lecture and so forth, and also the assessments just to check whether the students are on track."</blockquote>
+<cite><span class="cite-group b" style="background:#E67E22">Group B</span> Dr Nkosi Nkululeko — Group B Focus Group, 6 March 2026</cite>
+</div>
+</div>
+</div>
+</div>
+<!-- ARTEFACT -->
+<div aria-labelledby="lt-artefact" class="tab-panel" id="lp-artefact" role="tabpanel">
+<div class="lens-prose" style="margin-bottom:1.5rem"><div aria-labelledby="audio-artefact-label" class="audio-block"><p id="audio-artefact-label"><strong>Audio narration:</strong> Artefact</p><audio controls="" preload="none"><source src="artefact.mp3" type="audio/mpeg"/>Your browser does not support the audio element.</audio><details><summary>Read transcript</summary><p>The artefact lens asks where learning design becomes visible and tangible. Across both groups, artefacts ranged from full LMS courses, module structures, and H5P activities to interactive workbooks, micro-lessons, infographics, module guides, and assessment structures. What matters is not only the format, but what the artefact reveals about design choices. Lizeka’s offline resources encode the realities of uneven access. Mduduzi’s infographics foreground conceptual clarity and accessibility. Dr Nkosi’s artefacts reflect disciplinary coherence and accreditation. Bilqis and Megan’s artefacts show how structured online learning environments are assembled. Across all of these, artefacts are where pedagogical choices become material, even when the reasoning behind them is not always fully visible on the surface.</p></details></div>
+<h3>Tangible Outputs — Shaped by Context</h3>
+<p style="max-width:700px">Learning design as artefact is where contextual constraints become most visibly encoded. The same platform type (Moodle, H5P, video) produces entirely different outputs across institutional ecologies. Artefacts also reveal design values — Mduduzi's accessibility-centred infographics reflect a master's-level commitment to inclusive design.</p>
+</div>
+<div class="artefact-mosaic reveal">
+<div class="a-tile"><span aria-hidden="true" class="a-emoji">🗂️</span><h4>Structured LMS Courses</h4><p>Moodle modules with pages, discussions, assessments, navigation guides</p><div class="a-who">Group A: Bilqis, Megan, Lizeka</div></div>
+<div class="a-tile"><span aria-hidden="true" class="a-emoji">🎯</span><h4>H5P Interactive Activities</h4><p>Drag-and-drop, labelling, interactive video — designed for diverse learners</p><div class="a-who">Group A: Megan, Lizeka</div></div>
+<div class="a-tile"><span aria-hidden="true" class="a-emoji">📋</span><h4>Offline Workbooks</h4><p>Digital assets functional without internet — addressing the Eastern Cape divide</p><div class="a-who">Group A: Lizeka</div></div>
+<div class="a-tile"><span aria-hidden="true" class="a-emoji">🎬</span><h4>Multilingual Video &amp; Audio</h4><p>Webcam-recorded lessons in multiple local languages; transcribed by designer</p><div class="a-who">Group A: Lizeka</div></div>
+<div class="a-tile"><span aria-hidden="true" class="a-emoji">♿</span><h4>Accessibility Infographics</h4><p>Visual explanations designed for inclusive access — informed by master's research in accessibility</p><div class="a-who">Group B: Mduduzi</div></div>
+<div class="a-tile"><span aria-hidden="true" class="a-emoji">🔬</span><h4>Redesigned LMS Modules</h4><p>Course materials redesigned when student struggles with specific concepts are identified</p><div class="a-who">Group B: Jack Bailey</div></div>
+<div class="a-tile"><span aria-hidden="true" class="a-emoji">💬</span><h4>Discussion Forums &amp; Reflections</h4><p>Highly effective in diploma contexts; minimal engagement in short courses (Megan)</p><div class="a-who">Group A: Megan</div></div>
+<div class="a-tile"><span aria-hidden="true" class="a-emoji">📝</span><h4>Process Documents</h4><p>Storyboards, blueprints, dev docs circulating between LDs, SMEs, QA reviewers</p><div class="a-who">Group A: Bilqis</div></div>
+</div>
+<div class="quote-card" style="margin-top:1.5rem;border-color:var(--amber)">
+<blockquote>"The main artifact that I produce is a structured course or module on an LMS — generally Moodle. That can look like anything from learning pages, discussion activities, assessments, multimedia resources, navigation guides... In terms of autonomy with regards to multimedia resources, that also depends [on the contract]."</blockquote>
+<cite><span class="cite-group">Group A</span> Bilqis Deaney — Learning Technologist</cite>
+</div>
+<div class="quote-card" style="border-color:#4A90D9;background:#F0F6FF">
+<blockquote>"The artefacts vary depending on the project. For example, we might create an interactive course on Rise Articulate and then embed it into our LMS, which is called Funda. Or it could be something like restructuring a module guide... can even extend to redesigning an entire LMS site for a module, basically with the goal to improve navigation and usability."</blockquote>
+<cite><span class="cite-group b" style="background:#4A90D9">Group B</span> Jack Bailey — Group B Focus Group, 6 March 2026</cite>
+</div>
+<div class="quote-card" style="border-color:#9B59B6;background:#F8F0FF">
+<blockquote>"Anything that's difficult to understand, then we would work on using infographics and multimedia to make sure that it's easier to understand... I'm in the process of developing an accessibility support unit... it needs to comply with the appropriate accessibility standard, such as WCAG."</blockquote>
+<cite><span class="cite-group b" style="background:#9B59B6">Group B</span> Mduduzi Khumalo — Group B Focus Group, 6 March 2026</cite>
+</div><div class="synthesis-note"><p>Across both focus groups, accessibility emerges as a cross-cutting concern, but with different levels of institutionalisation. Bilqis treats WCAG compliance as a professional standard. Lizeka designs for physical and learning disabilities in response to direct advocacy from her community. Mduduzi has elevated accessibility into a research and field-building agenda through postgraduate study and publication. What this suggests is a continuum from reactive accommodation, through embedded professional practice, to active scholarship.</p></div>
+</div>
+<!-- FIELD -->
+<div aria-labelledby="lt-field" class="tab-panel" id="lp-field" role="tabpanel">
+<div class="lens-grid">
+<div class="lens-prose"><div aria-labelledby="audio-field_of_study-label" class="audio-block"><p id="audio-field_of_study-label"><strong>Audio narration:</strong> Field of Study</p><audio controls="" preload="none"><source src="field_of_study.mp3" type="audio/mpeg"/>Your browser does not support the audio element.</audio><details><summary>Read transcript</summary><p>The field of study lens revealed that learning design is not only something people do; it is also something people study, research, and formalise. Jack explicitly frames it as an area of professional development in his university. Megan’s participation in the course reflects an institutional gap she is trying to address through formal study. Mduduzi links accessibility to master’s research, publication, and institution-building. Dr Nkosi draws on teaching scholarship and constructive alignment. Bilqis refers to WCAG and analytics-informed decisions. Taken together, these examples show that learning design becomes a field when practitioners begin asking not only what works, but what standards, theories, and evidence should guide their work.</p></details></div>
+<h3>A Field in Active Formation</h3>
+<p>For our participants, learning design as a field of study is not abstract — it is something they are actively claiming, building, and being excluded from. Megan's enrollment in EDN4601 is the most direct evidence: she is studying to fill a gap her institution has not yet recognised.</p>
+<p>Jack explicitly frames learning design as a field of study in his university, where staff are encouraged to engage in professional development, conferences, and further study. Mduduzi connects his graphic design practice to academic work on accessibility — with a master's degree and publications in progress. Dr Nkosi draws on the language of constructive alignment and curriculum scholarship.</p>
+<div class="theory-pill">Gachago et al. (2025): The BOLD programme institutionalises the field in the Global South through stackable micro-credentials, flexible entry, and RPL pathways — challenging who gets to study LD at postgraduate level</div>
+</div>
+<div>
+<div class="quote-card">
+<blockquote>"When you don't have a learning designer, it often becomes difficult because you need someone who understands the theory behind how people learn, why people learn, what are the best tools in the online space, that sort of stuff."</blockquote>
+<cite><span class="cite-group">Group A</span> Megan Landman — enrolled EDN4601 to build this expertise</cite>
+</div>
+<div class="quote-card" style="border-color:var(--amber)">
+<blockquote>"After the release of the results, we analyse the results and design content based on the results of the analysis."</blockquote>
+<cite><span class="cite-group">Group A</span> Lizeka — evidence-based, data-informed design as field practice</cite>
+</div>
+<div class="quote-card" style="border-color:#9B59B6;background:#F8F0FF">
+<blockquote>"Accessibility is something that I've invested a lot in at my university... I'm in the process of developing an accessibility support unit... it needs to comply with the appropriate accessibility standard, such as WCAG or PGBOLD. So it's really something that I dedicated an entire master's degree to and I'm in the process of publishing a paper."</blockquote>
+<cite><span class="cite-group b" style="background:#9B59B6">Group B</span> Mduduzi Khumalo — Group B Focus Group, 6 March 2026</cite>
+</div>
+<div class="quote-card" style="border-color:var(--teal)">
+<blockquote>"Learning design is definitely a field of study... it is an area that's researched. Slowly you'll see there's a huge school of literature coming into being in terms of this disciplinary concept of learning design."</blockquote>
+<cite>Christine Immenga, “What is Learning Design?”, EDN4601 Week 1 Webinar, University of Cape Town, 23 Feb. 2026</cite>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ═══════════════════════════════════════
+     04 — VENN: PRACTICE AS MEDIATION (DARK)
+═══════════════════════════════════════ -->
+<section aria-labelledby="venn-h" class="section-dark" id="practice-venn">
+<div class="inner">
+<p aria-hidden="true" class="section-label dark-label">04 · Practice</p>
+<h2 class="section-h light" id="venn-h">Where Three Worlds Intersect</h2>
+<p class="section-lead light">Learning design practice is a continuous negotiation — not a linear sequence. Fawns (2022) calls this "entangled pedagogy": technology, pedagogy, purposes, values and context are always mutually shaping. No element exists without the others.</p>
+<div class="venn-wrap">
+<div style="display:flex;flex-direction:column;align-items:center">
+<svg aria-label="Venn diagram: learning design practice sits at the intersection of pedagogy, technology, and learner experience" role="img" style="width:100%;max-width:400px" viewbox="0 0 380 380">
+<defs>
+<filter id="glow2"><fegaussianblur result="b" stddeviation="4"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<radialgradient cx="50%" cy="50%" id="vbg"><stop offset="0%" stop-color="#243040"></stop><stop offset="100%" stop-color="#18292F"></stop></radialgradient>
+</defs>
+<circle cx="190" cy="190" fill="url(#vbg)" r="185"></circle>
+<circle cx="155" cy="145" fill="#1B6E61" fill-opacity=".28" r="115" stroke="#27A18E" stroke-width="1.5"></circle>
+<circle cx="225" cy="145" fill="#7A2840" fill-opacity=".28" r="115" stroke="#B05070" stroke-width="1.5"></circle>
+<circle cx="190" cy="215" fill="#B8742A" fill-opacity=".28" r="115" stroke="#D4955A" stroke-width="1.5"></circle>
+<text fill="#B4DED8" font-family="Plus Jakarta Sans,sans-serif" font-size="12" font-weight="700" text-anchor="middle" x="100" y="115">PEDAGOGY</text>
+<text fill="#EDD6DF" font-family="Plus Jakarta Sans,sans-serif" font-size="12" font-weight="700" text-anchor="middle" x="278" y="115">TECHNOLOGY</text>
+<text fill="#F3E0C5" font-family="Plus Jakarta Sans,sans-serif" font-size="12" font-weight="700" text-anchor="middle" x="190" y="346">LEARNER EXPERIENCE</text>
+<circle cx="190" cy="188" fill="rgba(24,41,47,.8)" filter="url(#glow2)" r="42"></circle>
+<text fill="white" font-family="Lora,serif" font-size="11" font-style="italic" text-anchor="middle" x="190" y="183">Learning</text>
+<text fill="white" font-family="Lora,serif" font-size="11" font-style="italic" text-anchor="middle" x="190" y="198">Design</text>
+<text fill="#27A18E" font-family="JetBrains Mono,monospace" font-size="9" text-anchor="middle" x="190" y="212">Practice</text>
+</svg>
+</div>
+<div class="venn-quotes">
+<div class="dark-quote">
+<blockquote>"I like to look at when students are engaging... I noticed that a lot of students were doing work in the Middle East on a Friday. So I switch the content release dates based on what's happening on the platform from the data."</blockquote>
+<cite><span class="cite-group">Group A</span> Bilqis — data-driven mediation</cite>
+</div>
+<div class="dark-quote" style="border-left-color:var(--berry)">
+<blockquote>"How am I going to deliver that same learning experience? What is consolidation? Is it just a crossword puzzle online? Is it a drag and drop? Is it a reflective discussion forum?"</blockquote>
+<cite><span class="cite-group">Group A</span> Megan — pedagogical translation under constraint</cite>
+</div>
+<div class="dark-quote" style="border-left-color:var(--amber)">
+<blockquote>"We had a debate last week... it was a painful plea to say 'please consider us. We are here. We are not going anywhere.'"</blockquote>
+<cite><span class="cite-group">Group A</span> Lizeka — learner-centred design for disability inclusion</cite>
+</div>
+<div class="dark-quote" style="border-left-color:#E67E22">
+<blockquote>"I act as a subject expert as well as a learning designer, because currently there is no learning designer at the moment working with me... I always try to ensure that it is within or it is linked with the learning outcomes as well as the activities."</blockquote>
+<cite><span class="cite-group b" style="background:#E67E22">Group B</span> Dr Nkosi — constructive alignment as mediating practice</cite>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ═══════════════════════════════════════
+     05 — SEVEN THEMES (Accordion)
+═══════════════════════════════════════ -->
+<section aria-labelledby="themes-h" class="section section-alt" id="themes">
+<div class="inner">
+<p aria-hidden="true" class="section-label">05 · AI-Assisted Analysis</p>
+<h2 class="section-h" id="themes-h">Seven Verified Themes</h2>
+<p class="section-lead">The AI identified seven interpretive themes across both focus groups. Our group verified each against the source transcripts, correcting three and annotating all. Click any theme to expand the full interpretation.</p><div class="synthesis-note"><p>A striking finding that only becomes visible across both focus groups is that Group B participants engage with theory more explicitly, while Group A participants often demonstrate theory through practice without naming it. Jack cites Fawns directly, Dr Nkosi speaks the language of constructive alignment, and Mduduzi references WCAG as a standards framework shaped by research. By contrast, Bilqis’s analytics work embodies a postdigital logic, and Lizeka’s offline-first practice enacts the 5A’s in action. This difference reflects professional culture and role location rather than different levels of expertise.</p></div><div aria-labelledby="audio-seven_themes-label" class="audio-block"><p id="audio-seven_themes-label"><strong>Audio narration:</strong> Seven Themes</p><audio controls="" preload="none"><source src="seven_themes.mp3" type="audio/mpeg"/>Your browser does not support the audio element.</audio><details><summary>Read transcript</summary><p>Our seven themes move the analysis beyond individual cases. Across both focus groups, we found that learning design is distributed across roles, practised as mediation, made visible through artefacts, shaped by theory, constrained by context, and marked by different forms of agency and access. The most important shift here is from description to synthesis. Instead of asking what each person said in isolation, we asked what patterns become visible when the six voices are read together. That shift matters, because postgraduate synthesis means arguing across cases. The themes show that learning design is not one thing happening in six places. It is a context-sensitive function that takes on different forms while retaining a shared concern with learner experience, design judgment, and educational coherence.</p></details></div>
+<div class="themes-grid reveal">
+<div class="theme-card">
+<button aria-controls="th1" aria-expanded="false" class="theme-toggle" id="th1-btn">
+<span class="theme-n" style="background:var(--teal)">1</span>
+<span class="theme-toggle-text"><h3>Learning design as a distributed role</h3><p>Not a single fixed profession</p></span>
+<svg aria-hidden="true" class="theme-chevron" fill="none" height="18" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="18"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</button>
+<div aria-labelledby="th1-btn" class="theme-body" id="th1" role="region">
+<p>Learning design does not appear in one uniform job title. It surfaces as a distributed responsibility taken up differently depending on context — from the specialised learning technologist to the lecturer who absorbs design alongside teaching, to the graphic designer who contributes visuals without the title. Employment model (contract vs. permanent) further shapes the level of autonomy a designer experiences. <em>Note: AI initially missed the contractor dimension — corrected in human verification.</em></p>
+<div class="evidence">"My role basically sits between pedagogy and technology."<cite>Bilqis Deaney — Group A Focus Group, 6 March 2026</cite></div>
+</div>
+</div>
+<div class="theme-card">
+<button aria-controls="th2" aria-expanded="false" class="theme-toggle" id="th2-btn">
+<span class="theme-n" style="background:var(--berry)">2</span>
+<span class="theme-toggle-text"><h3>Learning design as mediation and translation</h3><p>Practice as bridging between worlds</p></span>
+<svg aria-hidden="true" class="theme-chevron" fill="none" height="18" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="18"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</button>
+<div aria-labelledby="th2-btn" class="theme-body" id="th2" role="region">
+<p>Across all participants, learning design practice involves translating between content, pedagogical intentions, learner needs and institutional expectations into a workable learning experience. This mediation occurs between human actors (SME and designer), between modalities (contact and online), between policy and implementation, and between the ideal and the accessible. The result is that design is always context-shaped and never neutral.</p>
+<div class="evidence">"Subject matter experts and programme leads define the learning outcomes and content, while I translate those intentions into structured online learning experiences on the LMS."<cite>Bilqis Deaney — Group A Focus Group</cite></div>
+</div>
+</div>
+<div class="theme-card">
+<button aria-controls="th3" aria-expanded="false" class="theme-toggle" id="th3-btn">
+<span class="theme-n" style="background:var(--amber)">3</span>
+<span class="theme-toggle-text"><h3>Learning design as tangible artefacts</h3><p>Visible outputs of design decisions</p></span>
+<svg aria-hidden="true" class="theme-chevron" fill="none" height="18" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="18"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</button>
+<div aria-labelledby="th3-btn" class="theme-body" id="th3" role="region">
+<p>Participants produce tangible outputs that make learning design work visible: online courses, module structures, interactive H5P activities, multimedia resources, infographics, assessment rubrics and offline workbooks. These artefacts represent the implementation of design decisions. Mduduzi's infographics and Jack's redesigned LMS modules show that artefacts can be produced by people without formal LD titles. The accessibility dimension — WCAG compliance (Bilqis), multilingual video (Lizeka), Mduduzi's accessibility-centred visuals — also becomes visible at the artefact level.</p>
+<div class="evidence">"The main artifact I produce is a structured course or module on an LMS — generally Moodle."<cite>Bilqis Deaney — Group A Focus Group</cite></div>
+</div>
+</div>
+<div class="theme-card">
+<button aria-controls="th4" aria-expanded="false" class="theme-toggle" id="th4-btn">
+<span class="theme-n" style="background:#4A90D9">4</span>
+<span class="theme-toggle-text"><h3>Learning design as a field of study</h3><p>Theory, standards, research, development</p></span>
+<svg aria-hidden="true" class="theme-chevron" fill="none" height="18" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="18"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</button>
+<div aria-labelledby="th4-btn" class="theme-body" id="th4" role="region">
+<p>Participants engage with learning design as a body of knowledge: Megan is formally enrolled in the BOLD postgraduate diploma to build the expertise her institution lacks. Jack encourages professional development and engagement with LD as a discipline. Mduduzi has a master's degree dedicated to accessibility and is developing a publication — connecting his design practice to scholarship. Dr Nkosi draws on constructive alignment and curriculum research. Bilqis references WCAG standards, XAPI analytics, and mobile responsiveness as professional knowledge domains.</p>
+<div class="evidence">"It's really something that I dedicated an entire master's degree to and I'm in the process of publishing a paper. Hopefully it'll get published."<cite>Mduduzi Khumalo — Group B Focus Group, 6 March 2026</cite></div>
+</div>
+</div>
+<div class="theme-card">
+<button aria-controls="th5" aria-expanded="false" class="theme-toggle" id="th5-btn">
+<span class="theme-n" style="background:#9B59B6">5</span>
+<span class="theme-toggle-text"><h3>Context is constitutive, not peripheral</h3><p>The central finding</p></span>
+<svg aria-hidden="true" class="theme-chevron" fill="none" height="18" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="18"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</button>
+<div aria-labelledby="th5-btn" class="theme-body" id="th5" role="region">
+<p>The data does not just show learning design happening in different places. It shows that context fundamentally <em>shapes what learning design becomes</em>. In Bilqis's context, contract conditions shape design autonomy. In Megan's, CHE equivalence requirements and a vocational course mode create constraints that have no generic solution. In Lizeka's, the digital divide is not a secondary issue — it is the central design constraint. In Dr Nkosi's, professional body accreditation structures determine what can change and how quickly. This aligns with Fawns's (2022) entangled pedagogy: context is not external to design; it is one of the entangled elements shaping it from within.</p>
+<div class="evidence">"In Lizeka's context, the digital divide is not a secondary issue; it is a central design constraint that shapes every decision about format, platform, and offline capability."<cite>AI Interaction Log — Section 5, verified by group</cite></div>
+</div>
+</div>
+<div class="theme-card">
+<button aria-controls="th6" aria-expanded="false" class="theme-toggle" id="th6-btn">
+<span class="theme-n" style="background:#E67E22">6</span>
+<span class="theme-toggle-text"><h3>Learning design is fundamentally intentional</h3><p>A common orientation across difference</p></span>
+<svg aria-hidden="true" class="theme-chevron" fill="none" height="18" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="18"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</button>
+<div aria-labelledby="th6-btn" class="theme-body" id="th6" role="region">
+<p>Despite all contextual differences, participants share one orientation: deliberate, informed decision-making about how learning should occur. Jack redesigns resources in response to student struggles. Lizeka analyses results and designs content in response. Bilqis adapts design to learner context, accessibility and contract conditions. Megan deliberately maps the ICE framework into online activities. Dr Nkosi aligns learning outcomes, activities and assessments. This intentionality is the connective tissue across very different roles and contexts — and it is what distinguishes learning design from content delivery.</p>
+<div class="evidence">"I switch the content release dates based on what's happening on the platform from the data."<cite>Bilqis Deaney — Group A Focus Group (data-informed intentionality)</cite></div>
+</div>
+</div>
+<div class="theme-card" style="grid-column:1/-1">
+<button aria-controls="th7" aria-expanded="false" class="theme-toggle" id="th7-btn">
+<span class="theme-n" style="background:var(--slate)">7</span>
+<span class="theme-toggle-text"><h3>Learning design is characterised by productive tensions</h3><p>Autonomy vs regulation · Access vs ambition · Specialist vs distributed</p></span>
+<svg aria-hidden="true" class="theme-chevron" fill="none" height="18" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="18"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</button>
+<div aria-labelledby="th7-btn" class="theme-body" id="th7" role="region">
+<p>The data does not only show agreement — it surfaces tensions. <strong>Bilqis</strong>: designer autonomy vs client control. <strong>Megan</strong>: innovation vs CHE policy alignment. <strong>Lizeka</strong>: the push to digitise vs the reality of unequal access. <strong>Dr Nkosi</strong>: responsiveness to students vs lengthy accreditation approval cycles. <strong>Mduduzi</strong>: wanting to develop broader accessibility frameworks vs being called in only when specific content difficulties arise. These tensions are not problems to be solved — they are constitutive of learning design as a practice. They show that learning design is not a neutral or frictionless process but always involves navigating competing forces with professional judgement.</p>
+<div class="evidence">"What limits my design decisions is that we rarely, rarely interact directly with students... what Fawns was proposing [is] that learning design ideally involves a collaboration between teachers, designers, learners. But in our context, we mostly receive feedback through the lecturers or through an anonymous module evaluation."<cite>Jack Bailey — Group B Focus Group, 6 March 2026 (referencing Fawns, 2022)</cite></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ═══════════════════════════════════════
+     06 — RADAR CHART (Canvas)
+═══════════════════════════════════════ -->
+<section aria-labelledby="chart-h" class="section" id="chart">
+<div class="inner">
+<p aria-hidden="true" class="section-label">06 · Data Visualisation</p>
+<h2 class="section-h" id="chart-h">Design Orientation Across Contexts</h2>
+<p class="section-lead">Based on evidence from both focus groups, this radar chart visualises how strongly each contextual dimension features in each participant’s practice. Values are interpretive, not measured, and should be read as a visual synthesis rather than a quantitative finding.</p><div aria-labelledby="audio-radar_chart_explanation-label" class="audio-block"><p id="audio-radar_chart_explanation-label"><strong>Audio narration:</strong> Radar Chart Explanation</p><audio controls="" preload="none"><source src="radar_chart_explanation.mp3" type="audio/mpeg"/>Your browser does not support the audio element.</audio><details><summary>Read transcript</summary><p>This radar chart is best read as an interpretive visual summary, not as a measurement instrument. The axes represent analytical judgments drawn from the interviews and verified notes, rather than scores produced by a formal rubric or survey. Use the chart to notice broad patterns, not precise rankings. For example, some participants show stronger proximity to learners, others stronger accessibility focus, and others stronger institutional constraint. To explore those patterns, click participant names in the legend to include or exclude them. That allows you to compare one context against another without assuming the chart is objective data in a statistical sense.</p></details></div>
+<div aria-label="Chart interaction guidance" class="chart-instruction-banner legend-tip-pulse" role="note"><p>Tip: Click any participant name in the chart legend to show or hide their data. This lets you compare selected practitioners or focus on one context at a time.</p></div><div class="chart-wrap reveal"><div aria-label="How to use this chart" class="chart-help-box" role="note"><h4>How to use this chart</h4><p>This radar chart is interpretive rather than statistical. Click participant names in the legend to include or exclude them. Use it to notice broad patterns, not exact rankings.</p></div><div class="chart-method-note"><p>Important: These values represent the group’s interpretive judgement based on analysis of the focus group transcripts and verified AI notes. They are not statistically measured or independently validated. The radar chart is a visual synthesis tool, not a quantitative finding.</p></div>
+<h3>Evidence-Based Design Orientation — All Six Participants</h3>
+<p>Hover/touch each line to highlight. Dimensions: Pedagogy-first orientation, Technology capability, Learner access focus, Institutional constraint, Professional scholarship, Collaborative practice.</p>
+<canvas aria-label="Radar chart showing design orientation across six participants on six dimensions" height="420" id="radarChart" role="img"></canvas>
+<p class="chart-caption">This chart offers a visual summary of patterns across participants. Click names in the legend to include or exclude them from the display and compare contexts more clearly.</p></div>
+</div>
+</section>
+<!-- ═══════════════════════════════════════
+     07 — SIMILARITIES & DIFFERENCES
+═══════════════════════════════════════ -->
+<section aria-labelledby="pat-h" class="section section-alt" id="patterns">
+<div class="inner">
+<p aria-hidden="true" class="section-label">07 · Comparative Analysis</p>
+<h2 class="section-h" id="pat-h">Patterns &amp; Contrasts</h2>
+<p class="section-lead">Learning design is simultaneously convergent — sharing core values across contexts — and radically divergent, shaped by the specific structural conditions of each institutional ecology.</p><div aria-labelledby="audio-patterns_and_comparisons-label" class="audio-block"><p id="audio-patterns_and_comparisons-label"><strong>Audio narration:</strong> Patterns and Comparisons</p><audio controls="" preload="none"><source src="patterns_and_comparisons.mp3" type="audio/mpeg"/>Your browser does not support the audio element.</audio><details><summary>Read transcript</summary><p>The comparison section highlights two important contrasts across the groups. First, Group B participants are generally more removed from direct learner feedback. Jack often receives feedback through lecturers or evaluations, Mduduzi works mainly through instructional designers and subject experts, and Dr Nkosi evaluates within class and curriculum structures rather than through platform analytics. Group A participants, by contrast, described more direct feedback mechanisms, including analytics, engagement data, and local platform realities. Second, the groups differ in where constraints sit. Group B works inside stronger institutional and disciplinary approval structures, while Group A faces contracts, equivalence requirements, and infrastructural limitations. Across both groups, though, learning design remains collaborative and context dependent rather than individually owned.</p></details></div><div class="synthesis-note"><p>Across both focus groups, learning design appears as a distributed and collaborative function. However, the groups diverge sharply in two dimensions. Group B participants are generally more removed from direct learner feedback, relying more on lecturers, evaluation summaries, or in-class signals. Group A participants described more direct feedback mechanisms such as analytics, engagement data, and platform realities. The groups also differ in where constraints sit: Group B works inside stronger institutional and disciplinary approval structures, while Group A faces contract conditions, equivalence requirements, and digital access limitations.</p></div>
+<div aria-label="Switch between similarities and differences" class="pair-toggle reveal" role="group">
+<button aria-pressed="true" class="pair-btn active" id="btn-sim">Similarities</button>
+<button aria-pressed="false" class="pair-btn" id="btn-dif">Differences</button>
+</div>
+<div aria-label="Cross-context similarities" class="comp-panel active" id="panel-sim">
+<div class="sim-grid">
+<div class="sim-card reveal">
+<div class="sim-num" style="color:var(--teal);opacity:.1">01</div>
+<h3 style="color:var(--teal)">Collaboration is Fundamental</h3>
+<p>Design is never solo across any context. Bilqis with SMEs and QA teams. Lizeka with subject advisors. Megan bridging academic and online delivery. Jack with lecturers. Mduduzi with instructional designers. Dr Nkosi with curriculum teams. All relational, always.</p>
+<p class="sim-theory">↳ Fawns (2022, p. 715): "Entangled pedagogy is collective; agency is negotiated across stakeholders" — never resident in one person alone</p>
+</div>
+<div class="sim-card reveal d1">
+<div class="sim-num" style="color:var(--berry);opacity:.1">02</div>
+<h3 style="color:var(--berry)">Technology Mediates — Context Shapes Use</h3>
+<p>All participants use an LMS, video, interactive tools — but how these function differs entirely. Moodle in the Eastern Cape is an offline-first accessibility challenge. Moodle at Cambridge is a sophisticated analytics environment. Same tool; different ecologies.</p>
+<p class="sim-theory">↳ Fawns (2019): Postdigital lens — tools are always embedded in social, material and contextual activity; never neutral</p>
+</div>
+<div class="sim-card reveal d2">
+<div class="sim-num" style="color:var(--amber);opacity:.1">03</div>
+<h3 style="color:var(--amber)">Learner Experience is Central</h3>
+<p>Every participant, regardless of title, foregrounds the learner. This is the shift Christine Immenga identified: from instructional design (teacher-centred) to learning design (learner-centred). Bilqis adjusts release dates by learner timezone. Mduduzi designs for accessibility. Lizeka advocates for learners with disabilities.</p>
+<p class="sim-theory">↳ Immenga (EDN4601, Week 1): "Learning design takes away the focus from the teacher and puts it on the student"</p>
+</div>
+<div class="sim-card reveal d3">
+<div class="sim-num" style="color:var(--slate);opacity:.12">04</div>
+<h3 style="color:var(--slate)">Institutional Constraints Shape Everything</h3>
+<p>Budget, policy, QA processes, employment model, platform decisions, accreditation requirements — all constitute design practice. Yet within constraints, all six participants exercise creative professional judgement. The constraint-agency tension is not incidental; it is constitutive of the role.</p>
+<p class="sim-theory">↳ Gachago et al. (2025): Pragmatic flexibility — working within constraining structures toward more equitable, transformative goals</p>
+</div>
+<div class="sim-card reveal d4" style="grid-column:1/-1">
+<div class="sim-num" style="color:#4A90D9;opacity:.12">05</div>
+<h3 style="color:#4A90D9">Theory Informs Practice — Explicitly</h3>
+<p>Across both groups, participants actively engage with theoretical frameworks: Bilqis references WCAG and XAPI; Megan applies the ICE framework; Jack explicitly cites Fawns (2022) when reflecting on the gap between the collaborative ideal of learning design and his team's actual limited student access; Dr Nkosi uses constructive alignment; Mduduzi applies WCAG as a published accessibility standard. (see Jack’s direct reference in the quote below: “what Fawns was proposing … collaboration between teachers, designers, learners.”)</p>
+<div class="quote-card" style="margin-top:.85rem;border-color:#4A90D9;background:#F0F6FF">
+<blockquote>"What got me thinking about this is when we were going through Fawns, what Fawns was proposing that learning design ideally involves a collaboration between teachers, designers, learners. But in our context, we mostly receive feedback through the lecturers or through an anonymous module evaluation."</blockquote>
+<cite><span class="cite-group b" style="background:#4A90D9">Group B</span> Jack Bailey — Group B Focus Group, 6 March 2026</cite>
+</div>
+<p class="sim-theory" style="margin-top:.5rem">↳ Fawns (2022, p. 715): Entangled pedagogy is aspirational — theory can expose the gap between the ideal of collaborative design and institutional realities</p>
+</div>
+</div>
+</div>
+<div aria-label="Cross-context differences" class="comp-panel" id="panel-dif">
+<div class="diff-table-wrap">
+<table>
+<caption class="sr-only">Comparison of learning design across three institutional contexts based on five analytical dimensions</caption>
+<thead>
+<tr>
+<th scope="col">Dimension</th>
+<th scope="col"><span class="ct" style="background:rgba(27,110,97,.2);color:var(--teal)">Higher Ed / Freelance</span><br/><small style="color:var(--muted);font-weight:400">Bilqis, Megan, Jack</small></th>
+<th scope="col"><span class="ct" style="background:rgba(184,116,42,.2);color:var(--amber)">Government Education</span><br/><small style="color:var(--muted);font-weight:400">Lizeka</small></th>
+<th scope="col"><span class="ct" style="background:rgba(122,40,64,.2);color:var(--berry)">Disciplinary / Embedded</span><br/><small style="color:var(--muted);font-weight:400">Dr Nkosi, Mduduzi</small></th>
+</tr>
+</thead>
+<tbody>
+<tr><td>Role formalisation</td><td>Specialised or emerging roles; Megan building structures from scratch; Jack (NMU) in established LX role — positioned under all four facets simultaneously</td><td>Distributed across curriculum unit and subject specialists; no single LD owner</td><td>Design embedded in existing disciplinary roles; no dedicated LD title in Dr Nkosi's department</td></tr>
+<tr><td>Digital access assumption</td><td>Jack: majority of NMU students access LMS via cell phone web browser — mobile-first design is a priority. Bilqis: platform choice matters (e.g. Vimeo blocked in China)</td><td>Cannot assume device ownership; offline-first design essential; library as fallback access point</td><td>Campus infrastructure assumed; professional body platform requirements also shape access</td></tr>
+<tr><td>Primary design drivers</td><td>Contract terms, CHE policy, theory, learner experience, client requirements</td><td>Digital divide, DBE policy, student performance data, district realities</td><td>Professional body accreditation, constructive alignment, disciplinary standards, accessibility research</td></tr>
+<tr><td>Accessibility approach</td><td>WCAG as professional standard (Bilqis); emerging priority (Megan); Jack: screen readers, descriptive text, accurate captions — "just to make learning materials more usable for as many students as possible"</td><td>Central challenge — multilingual production, offline capability, responding to disability community advocacy</td><td>Mduduzi: "I dedicated an entire master's degree to [accessibility] and I'm in the process of publishing a paper" — developing an accessibility support unit, adopting WCAG and PGBOLD standards</td></tr>
+<tr><td>Measuring success</td><td>XAPI analytics, LMS engagement data (Bilqis); UX surveys (Megan); Jack: "we rarely, rarely interact directly with students" — relies on lecturer feedback and anonymous module evaluations</td><td>Admin data on educator logins per circuit; results analysis informing next design cycle</td><td>Dr Nkosi uses formative assessment each semester: "you cannot use a general perception that your students this year will be the same next year" — designs are adjusted per cohort</td></tr>
+<tr><td>Key design constraints</td><td>Contract terms shape autonomy; Jack: "the final approval rests with the lecturer"; Mduduzi: called in only when difficulty is flagged — low-to-medium autonomy</td><td>Digital divide, DBE policy, must design for educators not directly for students</td><td>Dr Nkosi: "12 weeks per semester" — over-designing disadvantages students; major changes require department, faculty, ECSA, and industry approval: "a no-go zone"</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<!-- ═══════════════════════════════════════
+     08 — LEARNING DESIGN PROCESS TIMELINE
+═══════════════════════════════════════ -->
+<section aria-labelledby="proc-h" class="section" id="process">
+<div class="inner">
+<p aria-hidden="true" class="section-label">08 · Learning Design Process</p>
+<h2 class="section-h" id="proc-h">How the Design Process Unfolds</h2>
+<p class="section-lead">While participants use different terminology and work in different contexts, their process descriptions reveal a common underlying pattern — from analysis through to evaluation and iteration. This timeline synthesises evidence from both groups.</p>
+<div class="reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start">
+<div>
+<div aria-label="Learning design process phases" class="timeline">
+<div class="tl-item">
+<div class="tl-dot" style="background:var(--teal);box-shadow:0 0 0 2px var(--teal)"></div>
+<div class="tl-content">
+<div class="tl-phase" style="color:var(--teal)">Phase 1 — Analyse</div>
+<h4>Understand Learners, Context &amp; Constraints</h4>
+<p>Intake surveys, results data, digital divide mapping, contract terms, accreditation requirements. Bilqis checks who has special needs before designing activities. Lizeka analyses exam results. Megan reviews CHE requirements.</p>
+<div class="tl-participants"><span class="tl-tag">Bilqis</span><span class="tl-tag">Lizeka</span><span class="tl-tag">Megan</span><span class="tl-tag">Dr Nkosi</span></div>
+</div>
+</div>
+<div class="tl-item">
+<div class="tl-dot" style="background:var(--berry);box-shadow:0 0 0 2px var(--berry)"></div>
+<div class="tl-content">
+<div class="tl-phase" style="color:var(--berry)">Phase 2 — Design</div>
+<h4>Translate Pedagogical Intentions into Activities</h4>
+<p>What is consolidation online? What platform? What format (video, offline workbook, H5P)? Jack redesigns when students struggle with concepts. Megan maps ICE into online equivalents. Dr Nkosi aligns constructively.</p>
+<div class="tl-participants"><span class="tl-tag">Jack</span><span class="tl-tag">Megan</span><span class="tl-tag">Dr Nkosi</span><span class="tl-tag">Bilqis</span></div>
+</div>
+</div>
+<div class="tl-item">
+<div class="tl-dot" style="background:var(--amber);box-shadow:0 0 0 2px var(--amber)"></div>
+<div class="tl-content">
+<div class="tl-phase" style="color:var(--amber)">Phase 3 — Develop</div>
+<h4>Build Artefacts — Course, Resource, Activity</h4>
+<p>Building on Moodle, producing H5P activities, recording multilingual video, creating infographics and accessibility visuals. Bilqis builds the LMS experience. Mduduzi creates accessible visual explanations.</p>
+<div class="tl-participants"><span class="tl-tag">Bilqis</span><span class="tl-tag">Lizeka</span><span class="tl-tag">Mduduzi</span></div>
+</div>
+</div>
+<div class="tl-item">
+<div class="tl-dot" style="background:#4A90D9;box-shadow:0 0 0 2px #4A90D9"></div>
+<div class="tl-content">
+<div class="tl-phase" style="color:#4A90D9">Phase 4 — Implement &amp; QA</div>
+<h4>Launch, Review, Quality Assure</h4>
+<p>External QA reviewers provide feedback on development documents. Bilqis describes multi-tier QA with external organisations. Megan plans UX surveys. WCAG compliance checking integrated throughout.</p>
+<div class="tl-participants"><span class="tl-tag">Bilqis</span><span class="tl-tag">Megan</span></div>
+</div>
+</div>
+<div class="tl-item">
+<div class="tl-dot" style="background:#9B59B6;box-shadow:0 0 0 2px #9B59B6"></div>
+<div class="tl-content">
+<div class="tl-phase" style="color:#9B59B6">Phase 5 — Evaluate &amp; Iterate</div>
+<h4>Data, Feedback, Redesign</h4>
+<p>XAPI engagement analytics (Bilqis); exam results analysis (Lizeka); mid and end course surveys (Megan); coaching feedback from learner coaches. Design decisions feed back into the next cycle.</p>
+<div class="tl-participants"><span class="tl-tag">Bilqis</span><span class="tl-tag">Lizeka</span><span class="tl-tag">Megan</span></div>
+</div>
+</div>
+</div>
+</div>
+<div>
+<div class="quote-card" style="border-color:var(--teal);margin-bottom:1rem">
+<blockquote>"After the release of the results, we analyse the results and design content based on the results of the analysis."</blockquote>
+<cite><span class="cite-group">Group A</span> Lizeka — data-driven design cycle</cite>
+</div>
+<div class="quote-card" style="border-color:var(--amber);margin-bottom:1rem">
+<blockquote>"I like to look at how many times someone rewind[s] a video. At what point did they rewind it... Is there a particular day in the week where they get most of the work done? Because that also affects how you design courses."</blockquote>
+<cite><span class="cite-group">Group A</span> Bilqis — XAPI evaluation-driven iteration</cite>
+</div>
+<div class="quote-card" style="border-color:#4A90D9;background:#F0F6FF;margin-bottom:1rem">
+<blockquote>"We rarely, rarely interact directly with students... we mostly receive feedback through the lecturers or through an anonymous module evaluation. I think this is an area that, in my institution at least, needs some sort of improvement."</blockquote>
+<cite><span class="cite-group b" style="background:#4A90D9">Group B</span> Jack Bailey — on measuring success, Group B Focus Group</cite>
+</div>
+<div class="quote-card" style="border-color:#E67E22;background:#FFF8F0">
+<blockquote>"We normally use formative assessment just to assess or to gauge whether students were able to grasp the content... you cannot just use a general perception that your students this year will be even the same next year. So that informs that you need to change [the design] during your semester."</blockquote>
+<cite><span class="cite-group b" style="background:#E67E22">Group B</span> Dr Nkosi — iterative, cohort-responsive design</cite>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ═══════════════════════════════════════
+     09 — IMPLICATIONS
+═══════════════════════════════════════ -->
+<section aria-labelledby="imp-h" class="section section-alt" id="implications">
+<div class="inner">
+<p aria-hidden="true" class="section-label">09 · Implications</p>
+<h2 class="section-h" id="imp-h">What This Tells Us About Learning Design</h2>
+<p class="section-lead">Four implications grounded in evidence from Group A and Group B, connected to the course's theoretical foundations.</p><div aria-labelledby="audio-implications-label" class="audio-block"><p id="audio-implications-label"><strong>Audio narration:</strong> Implications</p><audio controls="" preload="none"><source src="implications.mpeg" type="audio/mpeg"/>Your browser does not support the audio element.</audio><details><summary>Read transcript</summary><p>The implications of our findings are practical as well as conceptual. First, learning design capacity cannot be built through job titles alone, because design work is distributed across many roles. Second, context is constitutive of design, not peripheral to it. The digital divide, accreditation, contract conditions, and institutional strategy do not sit outside design decisions; they shape them from within. Third, accessible and equitable design is not a side issue. It appears across both groups, but at different stages of maturity, from emerging awareness to embedded standard to active research agenda. These findings suggest that learning design in African and Global South contexts must be understood through flexibility, responsiveness, and critical attention to conditions of access.</p></details></div>
+<div class="imp-grid">
+<article class="imp-card reveal" style="background:var(--teal);color:var(--white)">
+<div aria-hidden="true" class="imp-num">01</div>
+<div class="imp-icon" style="background:rgba(255,255,255,.15)"><svg aria-hidden="true" fill="none" height="18" stroke="white" stroke-linecap="round" stroke-width="2" viewbox="0 0 24 24" width="18"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4l3 3"></path></svg></div>
+<h3 style="color:var(--white)">Learning design cannot be separated from context</h3>
+<p style="color:rgba(255,255,255,.85)">The same tools, frameworks and titles mean different things across institutions. Designing well requires ecological understanding of context, not just technical skill. Fawns's (2022) entangled pedagogy insists that context is always already inside the design — not external to it.</p>
+</article>
+<article class="imp-card reveal d1" style="background:var(--berry);color:var(--white)">
+<div aria-hidden="true" class="imp-num">02</div>
+<div class="imp-icon" style="background:rgba(255,255,255,.15)"><svg aria-hidden="true" fill="none" height="18" stroke="white" stroke-linecap="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+<h3 style="color:var(--white)">The Global South demands its own design logic</h3>
+<p style="color:rgba(255,255,255,.85)">Mainstream LD models embed connectivity assumptions that fail in Lizeka's Eastern Cape context. Roberts and Hernandez’s (2019, section 2.2) 5A’s framework — availability, affordability, awareness, ability, agency — provides tools for non-binary, context-sensitive design. Structural change requires institutional will, not just design creativity.</p>
+</article>
+<article class="imp-card reveal d2" style="background:var(--amber);color:var(--white)">
+<div aria-hidden="true" class="imp-num">03</div>
+<div class="imp-icon" style="background:rgba(255,255,255,.15)"><svg aria-hidden="true" fill="none" height="18" stroke="white" stroke-linecap="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg></div>
+<h3 style="color:var(--white)">The field must professionalise — inclusively</h3>
+<p style="color:rgba(255,255,255,.85)">Megan's enrollment in EDN4601 illustrates the demand for LD expertise and its institutional absence. The BOLD programme's micro-credential, stackable structure and RPL pathways (Gachago et al., 2025) represent a socially just model for growing the field across diverse entry points — including practitioners like Mduduzi who contribute without the title.</p>
+<p style="color:rgba(255,255,255,.85);margin-top:.75rem">Gachago et al. (2025) draw on Veletsianos and Houlden’s (2020) idea of radical flexibility: equity requires more than flexible timing or format. It requires rethinking who gets recognised, what counts as expertise, and how access is structured. In this light, BOLD’s stackable pathways and recognition mechanisms move beyond affirmative fixes toward more transformative inclusion.</p></article>
+<article class="imp-card reveal d3" style="background:var(--ink);color:var(--white)">
+<div aria-hidden="true" class="imp-num">04</div>
+<div class="imp-icon" style="background:rgba(255,255,255,.1)"><svg aria-hidden="true" fill="none" height="18" stroke="white" stroke-linecap="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+<h3 style="color:var(--white)">Autonomy and collaboration are in productive tension</h3>
+<p style="color:rgba(255,255,255,.82)">All six participants navigate between constraint and creative agency. Bilqis prefers full autonomy but delivers under prescription. Megan needs quality control but values designer expertise. Dr Nkosi must seek approval for major changes. This tension is constitutive of the role — negotiated with professional judgement, not resolved by policy.</p>
+</article>
+</div>
+</div>
+</section>
+<!-- ═══════════════════════════════════════
+     10 — QUIZ
+═══════════════════════════════════════ -->
+<section aria-labelledby="quiz-h" class="quiz-section" id="quiz">
+<div class="inner">
+<p aria-hidden="true" class="section-label dark-label">10 · Test Your Understanding</p>
+<h2 class="section-h light" id="quiz-h" style="margin-bottom:.75rem">Quick Knowledge Check</h2>
+<p class="section-lead light" style="margin-bottom:2rem">Four questions drawn directly from the focus group evidence and course readings. Choose your answer — instant feedback is provided, and incorrect answers can be retried until you arrive at the strongest answer.</p>
+<div class="quiz-wrap" id="quiz-container">
+<div class="quiz-q" id="qq1">
+<p class="qtext">1. Bilqis describes her learning technologist role as sitting "between pedagogy and technology." Which theoretical concept best captures this positioning?</p>
+<div aria-label="Answer options for question 1" class="quiz-options" role="group">
+<button class="quiz-opt" data-q="1" data-v="A"><span class="opt-letter">A</span>Technological determinism — technology drives design outcomes</button>
+<button class="quiz-opt" data-q="1" data-v="B"><span class="opt-letter">B</span>Entangled pedagogy — technology, methods, context and values mutually shape each other</button>
+<button class="quiz-opt" data-q="1" data-v="C"><span class="opt-letter">C</span>Instructional design — a teacher-centred approach to content delivery</button>
+<button class="quiz-opt" data-q="1" data-v="D"><span class="opt-letter">D</span>Connectivism — learning through networks and connections</button>
+</div>
+<div class="quiz-feedback" id="qf1"></div>
+</div>
+<div class="quiz-q" id="qq2">
+<p class="qtext">2. Lizeka designs "interactive workbooks and other digital assets that function without Internet." Which framework from the course readings best explains why this design choice is essential in her context?</p>
+<div aria-label="Answer options for question 2" class="quiz-options" role="group">
+<button class="quiz-opt" data-q="2" data-v="A"><span class="opt-letter">A</span>The ADDIE model — a systematic instructional design process</button>
+<button class="quiz-opt" data-q="2" data-v="B"><span class="opt-letter">B</span>Constructive alignment — aligning outcomes, activities and assessment</button>
+<button class="quiz-opt" data-q="2" data-v="C"><span class="opt-letter">C</span>Roberts and Hernandez's 5'A's — digital access is not binary; availability, affordability and agency are all barriers</button>
+<button class="quiz-opt" data-q="2" data-v="D"><span class="opt-letter">D</span>Radical flexibility — time and place flexibility in formal programmes</button>
+</div>
+<div class="quiz-feedback" id="qf2"></div>
+</div>
+<div class="quiz-q" id="qq3">
+<p class="qtext">3. The AI analysis initially described Bilqis's role as "distributed" without mentioning the contract dimension. What did the group's human verification identify as the key missing element?</p>
+<div aria-label="Answer options for question 3" class="quiz-options" role="group">
+<button class="quiz-opt" data-q="3" data-v="A"><span class="opt-letter">A</span>The specific LMS tools she uses for course building</button>
+<button class="quiz-opt" data-q="3" data-v="B"><span class="opt-letter">B</span>That she works at Cambridge University Press &amp; Assessment</button>
+<button class="quiz-opt" data-q="3" data-v="C"><span class="opt-letter">C</span>The contract vs. permanent employment model and its direct effect on designer autonomy</button>
+<button class="quiz-opt" data-q="3" data-v="D"><span class="opt-letter">D</span>The number of stakeholders involved in quality assurance</button>
+</div>
+<div class="quiz-feedback" id="qf3"></div>
+</div>
+<div class="quiz-q" id="qq4">
+<p class="qtext">4. Christine Immenga identifies four ways of understanding learning design. According to the EDN4601 Week 1 framework, which of the following is NOT one of the four facets?</p>
+<div aria-label="Answer options for question 4" class="quiz-options" role="group">
+<button class="quiz-opt" data-q="4" data-v="A"><span class="opt-letter">A</span>Learning design as a field of study</button>
+<button class="quiz-opt" data-q="4" data-v="B"><span class="opt-letter">B</span>Learning design as a professional role</button>
+<button class="quiz-opt" data-q="4" data-v="C"><span class="opt-letter">C</span>Learning design as a curriculum framework</button>
+<button class="quiz-opt" data-q="4" data-v="D"><span class="opt-letter">D</span>Learning design as a product or artefact</button>
+</div>
+<div class="quiz-feedback" id="qf4"></div>
+</div>
+<div aria-live="polite" class="quiz-score" id="quiz-score"></div>
+<button aria-label="Reset quiz and try again" class="quiz-reset" id="quiz-reset">Try again →</button>
+</div>
+</div>
+</section>
+<!-- ═══════════════════════════════════════
+     11 — AI REFLECTION
+═══════════════════════════════════════ -->
+<section aria-labelledby="ai-h" class="section-dark" id="ai-reflection">
+<div class="inner">
+<p aria-hidden="true" class="section-label dark-label">11 · Critical AI Engagement</p>
+<h2 class="section-h light" id="ai-h">How We Used AI — And Where We Pushed Back</h2>
+<p class="section-lead light">Critical AI literacy requires deploying AI strategically, verifying its claims against evidence, and recognising its structural limitations. AI is a tool, not an authority.</p><div aria-labelledby="audio-ai_reflection-label" class="audio-block"><p id="audio-ai_reflection-label"><strong>Audio narration:</strong> AI Reflection</p><audio controls="" preload="none"><source src="ai_reflection.mpeg" type="audio/mpeg"/>Your browser does not support the audio element.</audio><details><summary>Read transcript</summary><p>AI helped us organise complexity, but it also needed correction. In the analysis process, the tool was useful for surfacing themes, contrasts, and possible interpretations across the transcripts. But our review showed why human verification matters. The AI sometimes over interpreted tensions, flattened participant nuance, or missed important distinctions such as contract based autonomy or the specific role of accreditation. In qualitative research terms, that means AI can assist with coding and pattern detection, but interpretation remains a human responsibility. For us, critical AI engagement was not an add on to the assignment. It became part of the methodology itself.</p></details></div>
+<div class="narrator-note"><p>Methodologically, this matters because AI assisted with pattern detection and summarisation, but interpretive judgement remained human. Our verification process functioned like a qualitative validity check: we challenged overstatement, restored nuance, and traced claims back to the transcript evidence.</p></div><div class="ai-cols">
+<div class="ai-col" style="background:rgba(39,161,142,.12);border:1px solid rgba(39,161,142,.25)">
+<div class="ai-col-hdr">
+<div class="ai-col-icon" style="background:var(--teal)">✓</div>
+<h3>What AI Did Well</h3>
+</div>
+<div class="ai-item"><span class="ai-bullet" style="color:var(--teal-mid)">›</span><p>Rapidly identified seven thematic patterns across both focus group transcripts</p></div>
+<div class="ai-item"><span class="ai-bullet" style="color:var(--teal-mid)">›</span><p>Structured findings coherently around the four analytical lenses</p></div>
+<div class="ai-item"><span class="ai-bullet" style="color:var(--teal-mid)">›</span><p>Produced initial draft interpretations as a scaffold for human synthesis</p></div>
+<div class="ai-item"><span class="ai-bullet" style="color:var(--teal-mid)">›</span><p>Generated side-by-side comparison tables enabling efficient group verification</p></div>
+</div>
+<div class="ai-col" style="background:rgba(184,116,42,.12);border:1px solid rgba(184,116,42,.25)">
+<div class="ai-col-hdr">
+<div class="ai-col-icon" style="background:var(--amber)">△</div>
+<h3>Where AI Fell Short</h3>
+</div>
+<div class="ai-item"><span class="ai-bullet" style="color:var(--amber)">›</span><p>Missed the contractor/employment model dimension of Bilqis's role</p></div>
+<div class="ai-item"><span class="ai-bullet" style="color:var(--amber)">›</span><p>Misread Dr Nkosi as "filling a missing role" rather than navigating accreditation constraints</p></div>
+<div class="ai-item"><span class="ai-bullet" style="color:var(--amber)">›</span><p>Flattened Jack's role to "support service," missing his multi-frame self-description</p></div>
+<div class="ai-item"><span class="ai-bullet" style="color:var(--amber)">›</span><p>Some sections summarised rather than interpreted — lacked analytical depth</p></div>
+</div>
+<div class="ai-col" style="background:rgba(122,40,64,.12);border:1px solid rgba(122,40,64,.25)">
+<div class="ai-col-hdr">
+<div class="ai-col-icon" style="background:var(--berry)">⊙</div>
+<h3>Our Verification Process</h3>
+</div>
+<div class="ai-item"><span class="ai-bullet" style="color:var(--berry)">›</span><p>Compared each AI claim against participant transcripts, section by section</p></div>
+<div class="ai-item"><span class="ai-bullet" style="color:var(--berry)">›</span><p>Documented corrections in a two-column original vs. revised comparison table</p></div>
+<div class="ai-item"><span class="ai-bullet" style="color:var(--berry)">›</span><p>Rejected or refined framings where they missed participant voice or context</p></div>
+<div class="ai-item"><span class="ai-bullet" style="color:var(--berry)">›</span><p>Final artefact reflects human interpretation, informed by — not dictated by — AI output</p></div>
+</div>
+</div>
+<h3 style="font-family:var(--fh);font-size:1.2rem;color:var(--white);margin-bottom:1rem">Three Key Corrections — Expanded</h3>
+<div class="acc-item">
+<button aria-controls="ac1" aria-expanded="false" class="acc-toggle" id="ac1-btn">
+        Correction 1: The contractor dimension of Bilqis's autonomy
+        <svg aria-hidden="true" class="acc-chevron" fill="none" height="17" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="17"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</button>
+<div aria-labelledby="ac1-btn" class="acc-body" id="ac1" role="region">
+<p style="font-size:.84rem;color:var(--muted);margin-bottom:.75rem">AI framed Bilqis's role as "distributed between institutions" — missing the employment model and its direct effect on autonomy, which she raised explicitly in the transcript.</p>
+<div class="diff-cols">
+<div class="diff-col orig"><h5>AI Original</h5><p>Learning design surfaces as a distributed role taken up differently by different people depending on context... <s>positioning her work between pedagogy and technology</s>.</p></div>
+<div class="diff-col rev"><h5>Human Correction</h5><p>Learning design is distributed not only between roles but also <mark>across employment models (contract vs. permanent) and its direct relation to designer autonomy</mark>. A contractor may be fully prescribed in one project and given complete creative authority in the next.</p></div>
+</div>
+</div>
+</div>
+<div class="acc-item">
+<button aria-controls="ac2" aria-expanded="false" class="acc-toggle" id="ac2-btn">
+        Correction 2: Dr Nkosi's professional body accreditation context
+        <svg aria-hidden="true" class="acc-chevron" fill="none" height="17" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="17"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</button>
+<div aria-labelledby="ac2-btn" class="acc-body" id="ac2" role="region">
+<p style="font-size:.84rem;color:var(--muted);margin-bottom:.75rem">The AI implied Dr Nkosi was "filling a missing role" where no specialist is available. The group corrected this — his context is shaped by disciplinary accreditation requirements, not simply an absence.</p>
+<div class="diff-cols">
+<div class="diff-col orig"><h5>AI Original</h5><p>Dr Nkosi shows that in some departments, especially disciplinary ones, lecturers take on design responsibilities <s>because there is no specialist designer available</s>.</p></div>
+<div class="diff-col rev"><h5>Human Correction</h5><p>Dr Nkosi's context reflects <mark>strict professional body accreditation requirements that shape the design of learning. A general learning designer may struggle without background in the discipline</mark> — this is structural, not merely a staffing gap.</p></div>
+</div>
+</div>
+</div>
+<div class="acc-item">
+<button aria-controls="ac3" aria-expanded="false" class="acc-toggle" id="ac3-btn">
+        Correction 3: Jack's multiple frames beyond "support service"
+        <svg aria-hidden="true" class="acc-chevron" fill="none" height="17" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="17"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</button>
+<div aria-labelledby="ac3-btn" class="acc-body" id="ac3" role="region">
+<p style="font-size:.84rem;color:var(--muted);margin-bottom:.75rem">AI reduced Jack's self-description to "a support service for academic staff." The group identified that support service is only one of four frames he uses, and that flattening to this one misrepresents his positioning.</p>
+<div class="diff-cols">
+<div class="diff-col orig"><h5>AI Original</h5><p>Jack describes himself as a learning experience designer <s>and he explicitly says that learning design is positioned as a support service for academic staff</s>.</p></div>
+<div class="diff-col rev"><h5>Human Correction</h5><p>Jack's role <mark>occupies multiple frames simultaneously — as collaborative partner, field-building practitioner, and support function. "Support service" is only one of the frames he uses</mark>, and reducing his self-description to this single frame misrepresents the complexity of his positioning.</p></div>
+</div>
+</div>
+</div>
+<blockquote style="border-left:3px solid var(--teal-mid);padding:1rem 1.25rem;margin-top:2rem;background:rgba(255,255,255,.05);border-radius:0 var(--r) var(--r) 0">
+<p style="font-size:.9rem;color:rgba(255,255,255,.8);font-style:italic;line-height:1.65">"AI cannot access what practitioners know about their own lived contexts. The contractor element Bilqis raised, the accreditation structures Dr Nkosi described, the multiple frames Jack used — these required human presence in the conversation, and human verification of the transcript, to surface."</p>
+<cite style="font-size:.75rem;color:var(--teal-mid);font-family:var(--fm);font-style:normal;display:block;margin-top:.5rem">Group 3 reflection — EDN4601 AI Interaction Log, 2026</cite>
+</blockquote>
+</div>
+</section>
+<!-- ═══════════════════════════════════════
+     12 — REFERENCES
+═══════════════════════════════════════ -->
+<section class="section" id="conclusion"><div class="inner"><p aria-hidden="true" class="section-label">12 · Synthesis Conclusion</p><h2 class="section-h">Drawing It Together: What Six Voices Tell Us About Learning Design</h2><p class="section-lead">A final cross-group synthesis that draws the four lenses, seven themes, and comparative analysis into one argument.</p><div aria-labelledby="audio-final_synthesis_conclusion-label" class="audio-block"><p id="audio-final_synthesis_conclusion-label"><strong>Audio narration:</strong> Final Synthesis Conclusion</p><audio controls="" preload="none"><source src="final_synthesis_conclusion.mpeg" type="audio/mpeg"/>Your browser does not support the audio element.</audio><details><summary>Read transcript</summary><p>Drawing the six interviews together, our strongest conclusion is that learning design surfaces less as a fixed profession and more as a context-sensitive function. Across both focus groups, participants consistently described design work as mediation: between content and learner, pedagogy and platform, theory and implementation, aspiration and constraint. The differences matter too. Some participants work close to learners and analytics, others through intermediaries. Some have wide design agency, others work inside strong professional or institutional constraints. But those differences do not weaken the analysis. They strengthen it. They show that learning design changes shape across contexts while retaining a shared concern with educational coherence, learner support, and meaningful experience. That, for us, is what the six voices together reveal about learning design.</p></details></div>
+<div class="spectrum-wrap">
+  <h3>
+    <span class="spectrum-title-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 16l4-4 4 3 8-8"></path>
+        <path d="M18 7h2v2"></path>
+      </svg>
+    </span>
+    A spectrum of how learning design appears
+  </h3>
+  <p>The six participants occupy different positions between formal or specialised learning design roles and more embedded or distributed design work. The point of the spectrum is not to rank them, but to show how the same function appears under different institutional conditions.</p>
+
+  <div class="spectrum-scale" aria-hidden="true">
+    <span class="left">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="4" y="6" width="16" height="12" rx="2"></rect>
+        <path d="M8 10h8M8 14h5"></path>
+      </svg>
+      Formal / Specialised
+    </span>
+    <span class="right">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 12h16"></path>
+        <path d="M8 8l-4 4 4 4"></path>
+        <path d="M16 8l4 4-4 4"></path>
+      </svg>
+      Embedded / Distributed
+    </span>
+  </div>
+
+  <div class="spectrum" aria-label="Spectrum from formal or specialised to embedded or distributed learning design roles" role="img">
+    <div class="spectrum-track" aria-hidden="true"></div>
+
+    <div class="s-point top" style="left:16%">
+      <span class="s-badge" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3"></circle><path d="M6 19c1.5-3 4-4.5 6-4.5S16.5 16 18 19"></path></svg>
+        Bilqis
+      </span>
+      <small><span>specialist learning</span><span>technologist</span></small>
+    </div>
+
+    <div class="s-point bottom" style="left:27%">
+      <span class="s-badge" style="background:#4A90D9">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="5" width="14" height="14" rx="2"></rect><path d="M9 9h6M9 13h6"></path></svg>
+        Jack
+      </span>
+      <small><span>formal learning experience</span><span>designer</span></small>
+    </div>
+
+    <div class="s-point top" style="left:46%">
+      <span class="s-badge" style="background:var(--berry)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18"></path><path d="M7 8h10"></path><path d="M8 16h8"></path></svg>
+        Megan
+      </span>
+      <small><span>strategic oversight</span><span>plus design work</span></small>
+    </div>
+
+    <div class="s-point bottom" style="left:61%">
+      <span class="s-badge" style="background:var(--amber)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+        Lizeka
+      </span>
+      <small><span>shared curriculum</span><span>support role</span></small>
+    </div>
+
+    <div class="s-point top" style="left:74%">
+      <span class="s-badge" style="background:#9B59B6">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16"></path><path d="M7 7v10"></path><path d="M12 7v10"></path><path d="M17 7v10"></path></svg>
+        Mduduzi
+      </span>
+      <small><span>visual and accessibility</span><span>design practice</span></small>
+    </div>
+
+    <div class="s-point bottom" style="left:88%">
+      <span class="s-badge" style="background:#E67E22">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 19V8l6-3 6 3v11"></path><path d="M10 12h4"></path></svg>
+        Dr Nkosi
+      </span>
+      <small><span>design embedded in</span><span>teaching and accreditation</span></small>
+    </div>
+  </div>
+
+  <p class="spectrum-note"><strong>How to read this:</strong> move from left to right as the function of learning design shifts from clearly named specialist roles toward work that is shared, embedded, or carried within other professional responsibilities.</p>
+
+  <div class="spectrum-legend-note">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <circle cx="12" cy="12" r="9"></circle>
+      <path d="M12 8v5"></path>
+      <path d="M12 16h.01"></path>
+    </svg>
+    <p>The spectrum is interpretive rather than evaluative. The SVG badges signal the type of role emphasis each participant brings to learning design, helping the reader distinguish specialist, strategic, shared, visual, and embedded forms of design work at a glance.</p>
+  </div>
+</div><div class="synthesis-note">
+<p>Across both focus groups, a single argument emerges from the data: learning design is not just a role, or a process, or a product, or a field of study. It is all four simultaneously, distributed across people, institutions, and contexts that share no common infrastructure but are united by a common orientation — the deliberate effort to make learning more intentional, more accessible, and more aligned with the realities of the people doing the learning.</p></div><div class="bridge-note"><p>The six participants occupy positions along multiple spectrums: from specialist to embedded, from high autonomy to low, from analytics-driven to offline-first, and from reactive accommodation to field-building scholarship. Yet across every position, what Fawns (2022, p. 715) calls the entangled nature of educational design is visible. No participant controls the full design ecology. Every participant negotiates agency within constraints — contractual, structural, infrastructural, and disciplinary.</p></div><div class="bridge-note"><p>Perhaps the most important implication for learning design as a field is what Gachago et al. (2025) and the BOLD programme represent in this context: growing capacity by recognising the many people who already do design work in many forms and under many names. Mduduzi has no learning design title. Dr Nkosi has no learning designer in his department. Lizeka has no guaranteed connectivity. All three are still designing learning — and all three belong in the story of the field.</p></div></div></section><section aria-labelledby="ref-h" class="section" id="references">
+<div class="inner">
+<p aria-hidden="true" class="section-label">13 · References</p>
+<h2 class="section-h" id="ref-h">Works Cited</h2>
+<div class="accessibility-statement">
+<h3>Accessibility and multimodal design statement</h3>
+<p>Accessibility was treated as a design principle rather than an afterthought. Every audio block includes a visible transcript, the chart includes written guidance and a methodological caveat, the page structure supports keyboard navigation, and the multimodal elements are designed to be usable in both visual and auditory modes.</p>
+<p>These choices reflect the course emphasis on inclusion, access, and learner-centred design, while also responding directly to the rubric’s call for effective integration of visual, audio, and textual elements.</p>
+</div>
+<div class="reference-note"><p>In-text citations use author-date format. Full references below follow MLA 9th edition.</p></div>
+<p class="section-lead" style="margin-bottom:2rem">MLA 9th edition format. All sources drawn on in the synthesis and analysis of this artefact.</p>
+<ul aria-label="Works cited in MLA format" class="ref-list">
+<li><span class="ref-n">01</span><span>Fawns, Tim. "Postdigital Education in Design and Practice." <em>Postdigital Science and Education</em>, vol. 1, no. 1, 2019, pp. 132–145. <a href="https://doi.org/10.1007/s42438-018-0021-8" rel="noopener noreferrer" target="_blank">https://doi.org/10.1007/s42438-018-0021-8</a>.</span></li>
+<li><span class="ref-n">02</span><span>Fawns, Tim. "An Entangled Pedagogy: Looking Beyond the Pedagogy–Technology Dichotomy." <em>Postdigital Science and Education</em>, vol. 4, 2022, pp. 711–728. <a href="https://doi.org/10.1007/s42438-022-00302-7" rel="noopener noreferrer" target="_blank">https://doi.org/10.1007/s42438-022-00302-7</a>.</span></li>
+<li><span class="ref-n">03</span><span>Gachago, Daniela, et al. "A BOLD Proposition: A Participatory Parity Approach to Radical Flexibility in Designing a Postgraduate Diploma." <em>African Perspectives of Research in Teaching and Learning</em>, vol. 9, no. 6, 2025, pp. 728–743. <a href="https://doi.org/10.70875/v9i6article6" rel="noopener noreferrer" target="_blank">https://doi.org/10.70875/v9i6article6</a>.</span></li>
+<li><span class="ref-n">04</span><span>Immenga, Christine. "What is Learning Design?" <em>EDN4601 Introduction to Learning Design — Week 1 Webinar Recording</em>, University of Cape Town, 23 Feb. 2026. Transcript: <em>GMT20260223-135350_Recording_transcript.vtt</em>.</span></li>
+<li><span class="ref-n">05</span><span>Roberts, Tony, and Kevin Hernandez. "Digital Access is Not Binary: The 5'A's of Technology Access in the Philippines." <em>Electronic Journal of Information Systems in Developing Countries</em>, vol. 85, no. 4, 2019, e12084. <a href="https://doi.org/10.1002/isd2.12084" rel="noopener noreferrer" target="_blank">https://doi.org/10.1002/isd2.12084</a>.</span></li>
+<li><span class="ref-n">06</span><span>Veletsianos, George, and Shandell Houlden. "Radical Flexibility and Relationality as Responses to Education in Times of Crisis." <em>Postdigital Science and Education</em>, vol. 2, 2020, pp. 849–862. <a href="https://doi.org/10.1007/s42438-020-00196-3" rel="noopener noreferrer" target="_blank">https://doi.org/10.1007/s42438-020-00196-3</a>.</span></li>
+<li><span class="ref-n">07</span><span>Group 3 — Focus Group A. <em>Focus Group Transcript</em>. 6 Mar. 2026. EDN4601 Introduction to Learning Design, University of Cape Town. Participants: Bilqis Deaney, Lizeka Portia Pango, Megan Landman. File: <em>GROUP_A_Focus_Group_Refined.docx</em>.</span></li>
+<li><span class="ref-n">08</span><span>Group 3 — Focus Group B. <em>Focus Group Transcript</em>. 6 Mar. 2026. EDN4601 Introduction to Learning Design, University of Cape Town. Participants: Jack Bailey (Learning Experience Designer, NMU), Mduduzi Khumalo (Graphic Designer), Dr Nkosi Nkululeko (Lecturer, Chemical Engineering). File: <em>GROUP_B_Focus_Group_Refined.docx</em>.</span></li>
+<li><span class="ref-n">09</span><span>Group 3. <em>AI Learning Design Analysis Interaction Log</em>. 2026. EDN4601 Introduction to Learning Design, University of Cape Town. File: <em>AI_Learning_Design_Analysis_Interaction_2.pdf</em>.</span></li>
+<li><span class="ref-n">10</span><span>Govender, Shanali. "Introduction to Learning Design — Group Task Briefing." <em>EDN4601 Week 2 Webinar</em>, University of Cape Town, 25 Feb. 2026. Transcript: <em>GMT20260225-135550_Recording_transcript.vtt</em>.</span></li>
+</ul>
+</div>
+</section>
+</main>
+<footer>
+<p>Group 3 · EDN4601 Introduction to Learning Design · University of Cape Town BOLD Programme · 2026</p>
+<p style="margin-top:.4rem">WCAG 2.1 AA compliant · Mobile responsive</p>
+</footer>
+<!-- ═══════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+/* ── Progress bar ── */
+const prog = document.getElementById('prog');
+function updateProg(){
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  const p = h > 0 ? (window.scrollY / h) * 100 : 0;
+  prog.style.width = p + '%';
+  prog.setAttribute('aria-valuenow', Math.round(p));
+}
+window.addEventListener('scroll', updateProg, {passive:true});
+updateProg();
+
+/* ── Nav active ── */
+const navAs = document.querySelectorAll('.nav-links a');
+const secs  = document.querySelectorAll('section[id], div[id="hero"]');
+const obs   = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      navAs.forEach(a => a.classList.remove('active'));
+      const t = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+      if(t) t.classList.add('active');
+    }
+  });
+},{rootMargin:'-40% 0px -55% 0px'});
+secs.forEach(s => obs.observe(s));
+
+/* ── Scroll reveal ── */
+const revEls = document.querySelectorAll('.reveal');
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('v'); revObs.unobserve(e.target); }
+  });
+},{threshold:.08});
+revEls.forEach(el => revObs.observe(el));
+
+/* ── Lens tabs (ARIA) ── */
+const tabBtns   = document.querySelectorAll('.tab-btn');
+const tabPanels = document.querySelectorAll('.tab-panel');
+tabBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    tabBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+    tabPanels.forEach(p => p.classList.remove('active'));
+    btn.classList.add('active'); btn.setAttribute('aria-selected','true');
+    document.getElementById(btn.getAttribute('aria-controls')).classList.add('active');
+  });
+  btn.addEventListener('keydown', e => {
+    const i = [...tabBtns].indexOf(btn);
+    if(e.key==='ArrowRight'){e.preventDefault();const n=tabBtns[(i+1)%tabBtns.length];n.click();n.focus();}
+    if(e.key==='ArrowLeft'){e.preventDefault();const n=tabBtns[(i-1+tabBtns.length)%tabBtns.length];n.click();n.focus();}
+  });
+});
+
+/* ── Theme accordion ── */
+document.querySelectorAll('.theme-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    document.querySelectorAll('.theme-toggle').forEach(b => {
+      b.setAttribute('aria-expanded','false');
+      document.getElementById(b.getAttribute('aria-controls')).classList.remove('open');
+    });
+    if(!open){ btn.setAttribute('aria-expanded','true'); document.getElementById(btn.getAttribute('aria-controls')).classList.add('open'); }
+  });
+});
+
+/* ── Comparison toggle ── */
+const btnSim = document.getElementById('btn-sim'), btnDif = document.getElementById('btn-dif');
+const pSim = document.getElementById('panel-sim'), pDif = document.getElementById('panel-dif');
+btnSim.addEventListener('click',()=>{ btnSim.classList.add('active'); btnSim.setAttribute('aria-pressed','true'); btnDif.classList.remove('active'); btnDif.setAttribute('aria-pressed','false'); pSim.classList.add('active'); pDif.classList.remove('active'); });
+btnDif.addEventListener('click',()=>{ btnDif.classList.add('active'); btnDif.setAttribute('aria-pressed','true'); btnSim.classList.remove('active'); btnSim.setAttribute('aria-pressed','false'); pDif.classList.add('active'); pSim.classList.remove('active'); });
+
+/* ── AI accordions ── */
+document.querySelectorAll('.acc-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    document.querySelectorAll('.acc-toggle').forEach(b => { b.setAttribute('aria-expanded','false'); document.getElementById(b.getAttribute('aria-controls')).classList.remove('open'); });
+    if(!open){ btn.setAttribute('aria-expanded','true'); document.getElementById(btn.getAttribute('aria-controls')).classList.add('open'); }
+  });
+});
+
+/* ── Radar Chart ── */
+document.addEventListener('DOMContentLoaded', () => {
+  const ctx = document.getElementById('radarChart');
+  if(!ctx) return;
+  new Chart(ctx, {
+    type:'radar',
+    data:{
+      labels:['Pedagogy-first\norientation','Technology\ncapability','Learner access\nfocus','Institutional\nconstraint','Professional\nscholarship','Collaborative\npractice'],
+      datasets:[
+        {label:'Bilqis (Grp A)',data:[7,9,8,6,7,8],borderColor:'#27A18E',backgroundColor:'rgba(39,161,142,.12)',borderWidth:2,pointBackgroundColor:'#27A18E'},
+        {label:'Megan (Grp A)', data:[8,6,8,9,8,7],borderColor:'#7A2840',backgroundColor:'rgba(122,40,64,.10)',borderWidth:2,pointBackgroundColor:'#7A2840'},
+        {label:'Lizeka (Grp A)',data:[7,6,10,8,5,7],borderColor:'#B8742A',backgroundColor:'rgba(184,116,42,.10)',borderWidth:2,pointBackgroundColor:'#B8742A'},
+        {label:'Jack (Grp B)',  data:[9,7,8,5,8,9],borderColor:'#4A90D9',backgroundColor:'rgba(74,144,217,.10)',borderWidth:2,borderDash:[5,3],pointBackgroundColor:'#4A90D9'},
+        {label:'Mduduzi (Grp B)',data:[6,8,10,4,9,8],borderColor:'#9B59B6',backgroundColor:'rgba(155,89,182,.08)',borderWidth:2,borderDash:[5,3],pointBackgroundColor:'#9B59B6'},
+        {label:'Dr Nkosi (Grp B)',data:[9,5,7,8,8,6],borderColor:'#E67E22',backgroundColor:'rgba(230,126,34,.08)',borderWidth:2,borderDash:[5,3],pointBackgroundColor:'#E67E22'},
+      ]
+    },
+    options:{
+      responsive:true,
+      plugins:{
+        legend:{position:'bottom',labels:{font:{family:"'Plus Jakarta Sans',sans-serif",size:11},color:'#4C6575',usePointStyle:true,padding:16}},
+        tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.raw}/10`}},
+      },
+      scales:{
+        r:{
+          min:0,max:10,ticks:{stepSize:2,font:{size:9},color:'#8DA0AB',backdropColor:'transparent'},
+          grid:{color:'rgba(76,101,117,.12)'},
+          angleLines:{color:'rgba(76,101,117,.15)'},
+          pointLabels:{font:{family:"'Plus Jakarta Sans',sans-serif",size:10,weight:'600'},color:'#18292F'},
+        }
+      }
+    }
+  });
+});
+
+/* ── Quiz ── */
+const answers = {1:'B', 2:'C', 3:'C', 4:'C'};
+const feedback = {
+  1:{B:"✓ Correct! Fawns (2022) argues that technology and pedagogy are 'entangled' — each element (technology, methods, purposes, values, context) mutually shapes the others. Bilqis's role as a mediator between pedagogy and technology perfectly illustrates this entanglement.",A:"Not quite. Technological determinism sees technology as the driver — but Bilqis explicitly describes a two-way relationship where she translates pedagogical intentions into technical realities.",C:"Not quite. Instructional design is teacher-centred — it's what Immenga identifies as the precursor to learner-centred learning design. Bilqis's role is decidedly learner-centred.",D:"Not quite. Connectivism is a learning theory about learning through digital networks — interesting, but not the concept that best captures the mediating role Bilqis describes."},
+  2:{C:"✓ Correct! Roberts and Hernandez's 5'A's framework (2019) argues that digital access is not binary — availability, affordability, awareness, ability, and agency all shape whether learners can actually use digital resources. Lizeka's offline-first design directly addresses the availability and affordability barriers in the Eastern Cape.",A:"Not quite. ADDIE (Analyse, Design, Develop, Implement, Evaluate) is a design process model — useful, but it doesn't explain why offline resources are essential in Lizeka's specific context.",B:"Not quite. Constructive alignment (Dr Nkosi's framework) is about aligning outcomes, activities and assessment — it's not about access barriers to digital learning.",D:"Not quite. Radical flexibility is about challenging educational structures to improve equity of access to formal programmes — it's relevant but not the most precise framework for the offline-first design decision."},
+  3:{C:"✓ Correct! The group noted that the AI framed Bilqis's role as simply 'distributed between institutions' without acknowledging that contract vs. permanent employment directly shapes the level of design autonomy she experiences — sometimes giving her full creative freedom, sometimes prescribing exactly what to build.",A:"Incorrect. The AI did describe her LMS tools — this was not the missing element.",B:"Incorrect. The AI correctly identified Bilqis's employer — this was not the correction.",D:"Incorrect. The QA structure was mentioned — the key missing element was the employment model and its effect on autonomy."},
+  4:{C:"✓ Correct! Christine Immenga's Week 1 framework identifies four facets: field of study, professional role, process, and product/artefact. Curriculum design is a related but distinct concept — Immenga explicitly distinguishes learning design from curriculum design.",A:"Incorrect. 'Field of study' is one of Immenga's four facets.",B:"Incorrect. 'Professional role' is one of Immenga's four facets.",D:"Incorrect. 'Product or artefact' is one of Immenga's four facets."}
+};
+
+let answered = {};
+let quizDone = false;
+document.querySelectorAll('.quiz-opt').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const q = btn.getAttribute('data-q');
+    const v = btn.getAttribute('data-v');
+    const qOpts = document.querySelectorAll(`.quiz-opt[data-q="${q}"]`);
+    const fb = document.getElementById(`qf${q}`);
+    const correct = answers[q];
+
+    if(answered[q] === correct) return;
+
+    qOpts.forEach(o => o.classList.remove('wrong'));
+
+    const isCorrect = v === correct;
+    fb.textContent = feedback[q][v] + (isCorrect ? '' : ' Please try again.');
+    fb.className = `quiz-feedback show ${isCorrect ? 'ok' : 'no'}`;
+
+    if(isCorrect){
+      answered[q] = v;
+      qOpts.forEach(o => {
+        o.disabled = true;
+        if(o.getAttribute('data-v') === correct) o.classList.add('correct');
+      });
+    } else {
+      btn.classList.add('wrong');
+    }
+
+    if(Object.keys(answered).length === 4 && !quizDone){
+      quizDone = true;
+      const scoreEl = document.getElementById('quiz-score');
+      const resetEl = document.getElementById('quiz-reset');
+      scoreEl.textContent = 'You answered all 4 questions correctly — excellent work.';
+      scoreEl.style.display = 'block';
+      resetEl.style.display = 'block';
+    }
+  });
+});
+document.getElementById('quiz-reset').addEventListener('click', () => {
+  answered = {}; quizDone = false;
+  document.querySelectorAll('.quiz-opt').forEach(btn => { btn.disabled=false; btn.classList.remove('correct','wrong','reveal-correct'); });
+  document.querySelectorAll('.quiz-feedback').forEach(fb => { fb.className='quiz-feedback'; fb.textContent=''; });
+  document.getElementById('quiz-score').style.display='none';
+  document.getElementById('quiz-reset').style.display='none';
+});
+
+/* ── Smooth scroll hero CTA ── */
+document.querySelector('.btn-primary[href="#methodology"]')?.addEventListener('click', e => {
+  e.preventDefault();
+  document.getElementById('methodology').scrollIntoView({behavior:'smooth'});
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  const tip = document.querySelector('.chart-instruction-banner');
+  if(!tip) return;
+  setTimeout(()=>tip.classList.remove('legend-tip-pulse'), 2600);
+});
+</script></body>
+</html>
